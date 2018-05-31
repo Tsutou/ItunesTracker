@@ -44,15 +44,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{artist.artistName}"
-                    android:textSize="@dimen/artist_text"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/languages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:text="@{artist.trackCensoredName}"
-                    android:textSize="@dimen/artist_text" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/artist_watchers"
