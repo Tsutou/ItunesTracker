@@ -20,6 +20,7 @@ public class ArtistListViewModel extends AndroidViewModel {
         artistListObservable = ArtistRepository.getInstance().getArtistList("AliciaKeys", "MusicVideo", LIMIT);
     }
 
+    //LiveDataのゲッター
     public LiveData<List<Artist>> getArtistListObservable(){
         return artistListObservable;
     }
