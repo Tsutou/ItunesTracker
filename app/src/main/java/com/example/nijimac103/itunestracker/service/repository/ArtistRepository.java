@@ -2,7 +2,6 @@ package com.example.nijimac103.itunestracker.service.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.example.nijimac103.itunestracker.service.model.Artist;
 
