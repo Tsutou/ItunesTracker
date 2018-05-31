@@ -1,6 +1,7 @@
 package com.example.nijimac103.itunestracker.service.repository;
 
 import com.example.nijimac103.itunestracker.service.model.Artist;
+import com.example.nijimac103.itunestracker.service.model.ArtistList;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface ItunesService {
 
     //一覧
     @GET("search")
-    Call<List<Artist>> getArtistList(@Query("term") String artist, @Query("entity") String entity, @Query("limit") int limit);
+    Call <ArtistList> getArtistList(@Query("term") String artist, @Query("entity") String entity, @Query("limit") int limit);
 
 //
 //    //詳細(現状使ってないい)

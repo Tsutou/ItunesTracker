@@ -51,4 +51,11 @@ dependencies {
     // ログ出し用 HTTPクライアント
     implementation "com.squareup.okhttp3:okhttp:3.10.0"
     implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    // okhttpの動きをカスタマイズするためのライブラリ
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    //Picassoトランスフォームライブラリ
+    implementation 'jp.wasabeef:picasso-transformations:2.1.2'
 }

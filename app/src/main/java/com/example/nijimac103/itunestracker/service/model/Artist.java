@@ -20,8 +20,8 @@ public class Artist {
     public String artworkUrl30;
     public String artworkUrl60;
     public String artworkUrl100;
-    public long collectionPrice;
-    public long trackPrice;
+    public float collectionPrice;
+    public float trackPrice;
     public String releaseDate;
     public String collectionExplicitness;
     public int discCount;

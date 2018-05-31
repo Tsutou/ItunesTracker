@@ -15,6 +15,7 @@ import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.databinding.FragmentArtistListBinding;
 import com.example.nijimac103.itunestracker.service.callback.ArtistClickCallback;
 import com.example.nijimac103.itunestracker.service.model.Artist;
+import com.example.nijimac103.itunestracker.service.model.ArtistList;
 import com.example.nijimac103.itunestracker.service.view.adapter.ArtistAdapter;
 import com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel;
 
@@ -55,12 +56,12 @@ public class ArtistListFragment extends Fragment {
 
     private void observeViewModel(ArtistListViewModel viewModel) {
 
-        viewModel.getArtistListObservable().observe(this, new Observer<List<Artist>>() {
+        viewModel.getArtistListObservable().observe(this, new Observer<ArtistList>() {
             @Override
-            public void onChanged(@Nullable List<Artist> artists) {
+            public void onChanged(@Nullable ArtistList artists) {
                 if (artists != null) {
                     binding.setIsLoading(false);
-                    artistListAdapter.setArtistList(artists);
+                    artistListAdapter.setArtistList(artists.);
                 }
             }
         });
