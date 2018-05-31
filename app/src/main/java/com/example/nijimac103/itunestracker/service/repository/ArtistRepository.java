@@ -2,8 +2,10 @@ package com.example.nijimac103.itunestracker.service.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.nijimac103.itunestracker.service.model.Artist;
+import com.google.gson.JsonElement;
 
 import java.util.List;
 
@@ -55,6 +57,7 @@ public class ArtistRepository {
             @Override
             public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
                 simulateDelay();
+                Log.d("出てる？？？",response.body().toString());
                 data.setValue(response.body());
 
             }
@@ -62,6 +65,7 @@ public class ArtistRepository {
             @Override
             public void onFailure(Call<List<Artist>> call, Throwable t) {
                 //TODO: null代入良くない + エラー処理
+                Log.d("エラーだよおおおおお",t.toString());
                 data.setValue(null);
             }
         });

@@ -1,5 +1,7 @@
 package com.example.nijimac103.itunestracker.service.model;
 
+import java.io.Serializable;
+
 public class Artist {
     public String wrapperType;
     public String kind;

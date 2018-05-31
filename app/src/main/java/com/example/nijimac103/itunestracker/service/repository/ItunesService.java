@@ -13,7 +13,7 @@ public interface ItunesService {
     String HTTPS_API_ITUNES_URL = "https://itunes.apple.com/";
 
     //一覧
-    @GET("/search")
+    @GET("search")
     Call<List<Artist>> getArtistList(@Query("term") String artist, @Query("entity") String entity, @Query("limit") int limit);
 
 //

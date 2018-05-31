@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/loading_artists"
+            android:text="ロード中です...."
             android:textAlignment="center"
             app:visibleGone="@{isLoading}"/>
 
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/artist_header1"
-                android:text="@string/github_artists"
+                android:text="Watch awesome Music Videos"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
@@ -40,7 +40,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/artist_list"
-                android:contentDescription="@string/artist_list"
+                android:contentDescription="Artist List"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="LinearLayoutManager"
