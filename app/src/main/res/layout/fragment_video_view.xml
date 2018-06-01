@@ -5,12 +5,11 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
     android:orientation="vertical">
 
-        <WebView
-            android:id="@+id/webview"
+        <VideoView android:id="@+id/videoView"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_gravity="center"/>
 
 </FrameLayout>

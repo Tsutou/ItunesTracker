@@ -7,7 +7,7 @@ import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.service.model.Artist;
 import com.example.nijimac103.itunestracker.service.util.FragmentUtils;
 import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistListFragment;
-import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistWebViewFragment;
+import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistVideoViewFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     //詳細画面への遷移
     public void show(Artist artist) {
-        ArtistWebViewFragment fragment = new ArtistWebViewFragment();
+        ArtistVideoViewFragment fragment = new ArtistVideoViewFragment();
 
         FragmentUtils.setArgsToFragment(fragment,"URL",artist.previewUrl);
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.fragment_container,
                 getSupportFragmentManager(),
                 fragment,
-                ArtistWebViewFragment.TAG,
+                ArtistVideoViewFragment.TAG,
                 "artist");
     }
 }
