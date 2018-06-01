@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="artist"
             type="com.example.nijimac103.itunestracker.service.model.Artist" />
