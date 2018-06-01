@@ -61,7 +61,7 @@ public class ArtistListFragment extends Fragment {
             public void onChanged(@Nullable ArtistList artists) {
                 if (artists != null) {
                     binding.setIsLoading(false);
-                    artistListAdapter.setArtistList(artists.);
+                    artistListAdapter.setArtistList(artists.results);
                 }
             }
         });

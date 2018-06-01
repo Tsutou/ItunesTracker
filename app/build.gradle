@@ -58,4 +58,7 @@ dependencies {
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     //Picassoトランスフォームライブラリ
     implementation 'jp.wasabeef:picasso-transformations:2.1.2'
+
+    //guava
+    implementation 'com.google.guava:guava:25.0-android'
 }
