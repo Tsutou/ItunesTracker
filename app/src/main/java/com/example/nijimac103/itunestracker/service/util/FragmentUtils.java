@@ -18,7 +18,7 @@ public class FragmentUtils {
         transaction.commit();
     }
 
-    public static void insertFragmentToActivity(@NonNull int parentLayoutId, @NonNull FragmentManager fragmentManager,
+    public static void insertFragmentToActivity(int parentLayoutId, @NonNull FragmentManager fragmentManager,
                                              @NonNull Fragment fragment, String tag) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
