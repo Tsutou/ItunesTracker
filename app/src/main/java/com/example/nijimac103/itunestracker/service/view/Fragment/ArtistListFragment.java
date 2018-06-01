@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.view;
+package com.example.nijimac103.itunestracker.service.view.Fragment;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
@@ -16,6 +16,7 @@ import com.example.nijimac103.itunestracker.databinding.FragmentArtistListBindin
 import com.example.nijimac103.itunestracker.service.callback.ArtistClickCallback;
 import com.example.nijimac103.itunestracker.service.model.Artist;
 import com.example.nijimac103.itunestracker.service.model.ArtistList;
+import com.example.nijimac103.itunestracker.service.view.MainActivity;
 import com.example.nijimac103.itunestracker.service.view.adapter.ArtistAdapter;
 import com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel;
 
@@ -71,7 +72,7 @@ public class ArtistListFragment extends Fragment {
         @Override
         public void onClick(Artist artist) {
             if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-//                ((MainActivity) getActivity()).show(artist);
+                ((MainActivity) getActivity()).show(artist);
             }
         }
     };
