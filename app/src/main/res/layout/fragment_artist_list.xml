@@ -5,6 +5,7 @@
 
     <data>
         <variable name="isLoading" type="boolean" />
+        <variable name="viewModel" type="com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel" />
     </data>
 
     <LinearLayout
@@ -28,12 +29,12 @@
             app:visibleGone="@{!isLoading}">
 
             <EditText
+                android:id="@+id/search_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/artist_header1"
                 android:textColor="@color/cardview_light_background"
-                android:text="Beatles"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"

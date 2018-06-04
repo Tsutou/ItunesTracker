@@ -7,9 +7,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.databinding.FragmentArtistListBinding;
@@ -20,9 +23,8 @@ import com.example.nijimac103.itunestracker.service.view.MainActivity;
 import com.example.nijimac103.itunestracker.service.view.adapter.ArtistAdapter;
 import com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel;
 
-import java.util.List;
 
-public class ArtistListFragment extends Fragment {
+public class ArtistListFragment extends Fragment{
     public static final String TAG = "ArtistListFragment";
     private ArtistAdapter artistListAdapter;
     private FragmentArtistListBinding binding;
@@ -53,6 +55,24 @@ public class ArtistListFragment extends Fragment {
                 ViewModelProviders.of(this).get(ArtistListViewModel.class);
 
         observeViewModel(viewModel);
+
+        binding.searchArtist.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                viewModel.reloadArtists(s.toString());
+                observeViewModel(viewModel);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void observeViewModel(ArtistListViewModel viewModel) {
@@ -76,6 +96,4 @@ public class ArtistListFragment extends Fragment {
             }
         }
     };
-
-
 }
