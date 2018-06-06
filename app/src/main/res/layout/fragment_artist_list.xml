@@ -28,17 +28,28 @@
             android:orientation="vertical"
             app:visibleGone="@{!isLoading}">
 
-            <EditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/search_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:textSize="@dimen/artist_header1"
-                android:textColor="@color/cardview_light_background"
+                android:singleLine="true"
+                android:autoSizeTextType="uniform"
+                android:hint="Please enter your loved musician"
+                app:met_floatingLabelText="Enjoy Reactive MusicVideo Trackinig!"
+                app:met_maxCharacters="20"
+                app:met_baseColor="#fff"
+                app:met_primaryColor="#fff"
+                app:met_errorColor="#fff"
+                app:met_textColor="#fff"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelPadding="@dimen/bottom_text_size"
+                app:met_hideUnderline="true"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:textAlignment="center"/>
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/artist_list"

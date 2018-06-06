@@ -26,7 +26,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         this.artistClickCallback = articleListCallback;
     }
 
-    public void setArtistList(final List<? extends Artist> artistList){
+    public void setArtistList(final List<? extends Artist> artistList, final Boolean isReload){
 
         if(this.artistList == null){
             this.artistList = artistList;
@@ -35,7 +35,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             notifyItemRangeInserted(0,artistList.size());
 
         }else{
+
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback(){
+
                 @Override
                 public int getOldListSize() {
                     return ArtistAdapter.this.artistList.size();
@@ -56,7 +58,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
                     Artist artist = artistList.get(newItemPosition);
                     Artist old = artistList.get(oldItemPosition);
 
-                    return artist.trackId == old.trackId && Objects.equals(artist.previewUrl, old.previewUrl);
+                    return artist.trackId == old.trackId && Objects.equals(artist.previewUrl, old.previewUrl) && !isReload;
                 }
             });
 

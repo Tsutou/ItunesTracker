@@ -12,15 +12,15 @@ import com.example.nijimac103.itunestracker.service.repository.ArtistRepository;
 public class ArtistListViewModel extends AndroidViewModel {
 
     private LiveData<ArtistList> artistListObservable;
-    private int LIMIT = 30;
     private ArtistRepository repo;
+    private int LIMIT = 50;
 
     public ArtistListViewModel(Application application) {
         super(application);
 
         repo = ArtistRepository.getInstance();
 
-        artistListObservable = repo.getArtistList("sample", "musicVideo", LIMIT);
+        artistListObservable = repo.getArtistList("sample", "musicVideo",LIMIT);
     }
 
     //LiveDataのゲッター
@@ -31,6 +31,6 @@ public class ArtistListViewModel extends AndroidViewModel {
 
     public void reloadArtists(CharSequence text){
         Log.d("テキストおおおお",text.toString());
-        artistListObservable = repo.getArtistList(text.toString(), "musicVideo", LIMIT);
+        artistListObservable = repo.getArtistList(text.toString(), "musicVideo",LIMIT);
     }
 }

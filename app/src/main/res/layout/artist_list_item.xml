@@ -43,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{artist.artistName}"
+                    android:autoSizeTextType="uniform"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -53,7 +54,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="@{artist.trackCensoredName}"
-                    android:textSize="12sp" />
+                    android:autoSizeTextType="uniform"  />
 
                 <TextView
                     android:id="@+id/artist_watchers"

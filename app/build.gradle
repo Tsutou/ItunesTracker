@@ -61,4 +61,7 @@ dependencies {
 
     //guava
     implementation 'com.google.guava:guava:25.0-android'
+
+    //editText
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 }

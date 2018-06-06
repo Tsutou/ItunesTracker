@@ -12,7 +12,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.databinding.FragmentArtistListBinding;
@@ -24,7 +23,7 @@ import com.example.nijimac103.itunestracker.service.view.adapter.ArtistAdapter;
 import com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel;
 
 
-public class ArtistListFragment extends Fragment{
+public class ArtistListFragment extends Fragment {
     public static final String TAG = "ArtistListFragment";
     private ArtistAdapter artistListAdapter;
     private FragmentArtistListBinding binding;
@@ -54,35 +53,19 @@ public class ArtistListFragment extends Fragment{
         final ArtistListViewModel viewModel =
                 ViewModelProviders.of(this).get(ArtistListViewModel.class);
 
-        observeViewModel(viewModel);
+        observeViewModel(viewModel, false);
 
-        binding.searchArtist.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                viewModel.reloadArtists(s.toString());
-                observeViewModel(viewModel);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        binding.searchArtist.addTextChangedListener(getArtistWatcher(viewModel));
     }
 
-    private void observeViewModel(ArtistListViewModel viewModel) {
+    private void observeViewModel(ArtistListViewModel viewModel, final Boolean isReload) {
 
         viewModel.getArtistListObservable().observe(this, new Observer<ArtistList>() {
             @Override
             public void onChanged(@Nullable ArtistList artists) {
                 if (artists != null) {
                     binding.setIsLoading(false);
-                    artistListAdapter.setArtistList(artists.results);
+                    artistListAdapter.setArtistList(artists.results, isReload);
                 }
             }
         });
@@ -96,4 +79,30 @@ public class ArtistListFragment extends Fragment{
             }
         }
     };
+
+
+    public TextWatcher getArtistWatcher(final ArtistListViewModel viewModel) {
+
+        final TextWatcher artistWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (2 < count && count < 21 ) {
+                    viewModel.reloadArtists(s.toString());
+                    observeViewModel(viewModel, true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+        return artistWatcher;
+    }
+
 }
