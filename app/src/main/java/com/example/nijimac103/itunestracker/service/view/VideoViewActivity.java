@@ -25,7 +25,6 @@ public class VideoViewActivity extends AppCompatActivity {
         String artistPreviewUrl = i.getStringExtra(URL);
 
         addVideoViewFragment(fragment, artistPreviewUrl);
-
     }
 
     private void addVideoViewFragment(ArtistVideoViewFragment fragment, String artistPreviewUrl) {

@@ -30,7 +30,6 @@ public class ArtistListViewModel extends AndroidViewModel {
     }
 
     public void reloadArtists(CharSequence text){
-        Log.d("テキストおおおお",text.toString());
         artistListObservable = repo.getArtistList(text.toString(), "musicVideo",LIMIT);
     }
 }

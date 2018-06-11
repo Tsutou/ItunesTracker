@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.service.model.Artist;
 import com.example.nijimac103.itunestracker.service.model.ArtistList;
 import com.example.nijimac103.itunestracker.service.util.FragmentUtils;
+import com.example.nijimac103.itunestracker.service.util.LocationUtil;
 import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistListFragment;
 import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistVideoViewFragment;
 import com.example.nijimac103.itunestracker.service.view.adapter.ArtistViewPagerAdapter;
