@@ -13,6 +13,8 @@ import android.widget.VideoView;
 import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.service.util.FragmentUtils;
 
+import static com.example.nijimac103.itunestracker.service.view.MainActivity.URL;
+
 public class ArtistVideoViewFragment extends Fragment {
 
     public static final String TAG = "ArtistVideoViewFragment";
@@ -26,9 +28,10 @@ public class ArtistVideoViewFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_video_view, container, false);
 
-        String url = FragmentUtils.getArgsOfPreFragment(this,"URL");
+        String url = FragmentUtils.getArgsOfPreFragment(this, URL);
 
         VideoView videoView = v.findViewById(R.id.videoView);
+
         // インターネット上のファイルを再生
         videoView.setVideoURI(Uri.parse(url));
         videoView.start();
