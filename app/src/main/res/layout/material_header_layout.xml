@@ -9,25 +9,18 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/ToolBarStyle">
-        <com.facebook.shimmer.ShimmerFrameLayout xmlns:shimmer="http://schemas.android.com/tools"
-            android:id="@+id/shimmer_view_container"
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:shimmer_repeat_count="1"
-            shimmer:duration="800">
+            android:layout_centerHorizontal="true"
+            android:text="Reactive MV Tracker"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:textStyle="normal"
+            android:typeface="serif" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="Reactive MV Tracker"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="25sp"
-                android:textStyle="normal"
-                android:typeface="serif"/>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

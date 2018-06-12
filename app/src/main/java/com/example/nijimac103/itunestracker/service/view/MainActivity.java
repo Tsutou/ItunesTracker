@@ -35,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
             seUpViewPager();
         }
 
-        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-
-        stopShimmerText();
     }
 
     //ViewPagerの設定

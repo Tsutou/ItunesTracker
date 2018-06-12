@@ -16,7 +16,6 @@ public class ArtistListViewModel extends AndroidViewModel {
     private ArtistRepository repo;
     private int LIMIT = 50;
     private int count;
-    Handler _handler = new Handler();
 
     public ArtistListViewModel(Application application) {
         super(application);
@@ -39,7 +38,7 @@ public class ArtistListViewModel extends AndroidViewModel {
             artistListObservable = repo.getArtistList(text.toString(), "musicVideo", LIMIT);
             count += 1;
         } else {
-            Log.d("監視",count + "制限超えとるでーーー");
+            Log.d("監視",count + "制限超過");
         }
     }
 
