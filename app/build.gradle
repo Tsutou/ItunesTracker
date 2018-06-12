@@ -65,6 +65,6 @@ dependencies {
     //editText
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
-    //Toolbar decoration
-    implementation 'com.facebook.shimmer:shimmer:0.2.0'
+//    //Toolbar decoration
+//    implementation 'com.facebook.shimmer:shimmer:0.2.0'
 }

@@ -8,10 +8,6 @@ import android.util.Log;
 
 import com.example.nijimac103.itunestracker.service.model.ArtistList;
 import com.example.nijimac103.itunestracker.service.repository.ArtistRepository;
-import com.example.nijimac103.itunestracker.service.util.CalcUtils;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import static com.example.nijimac103.itunestracker.service.util.CalcUtils.getRand;
 
@@ -19,11 +15,14 @@ import static com.example.nijimac103.itunestracker.service.util.CalcUtils.getRan
 public class ArtistListViewModel extends AndroidViewModel {
 
     public static final int DELAY_MINUTES = 60000;
+    public static final int MAX_REQUEST_PER_MINUTE = 20;
+    private int LIMIT = 30;
+    public static final int ZERO = 0;
     public static final String MUSIC_VIDEO = "musicVideo";
     private LiveData<ArtistList> artistListObservable;
     private ArtistRepository repo;
-    private int LIMIT = 30;
     private int count;
+
     //TODO:決め打ちでなく、rankingからとってきてTrendとしてもいいかも
     private String[] defaultArtists = {"aliciakeys","ladygaga","caroleking","beatles","jamestaylor","ericclapton","beyonce","jamesbrown"};
 
@@ -44,7 +43,7 @@ public class ArtistListViewModel extends AndroidViewModel {
     }
 
     public void reloadArtists(CharSequence text) {
-        if (count <= 20) {
+        if (count <= MAX_REQUEST_PER_MINUTE) {
             artistListObservable = repo.getArtistList(text.toString(), "musicVideo", LIMIT);
             count++;
         } else {
@@ -60,12 +59,12 @@ public class ArtistListViewModel extends AndroidViewModel {
             @Override
             public void run() {
                 // UIスレッド
-                if (count > 18) {
+                if (count > MAX_REQUEST_PER_MINUTE) {
                     Log.d("監視", count + "だから危険");
                 } else {
                     Log.d("監視", count + "だから安全");
                 }
-                count = 0;
+                count = ZERO;
                 handler.postDelayed(this, DELAY_MINUTES);
             }
         }, DELAY_MINUTES);

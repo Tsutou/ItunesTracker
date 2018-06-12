@@ -23,6 +23,34 @@ import static com.example.nijimac103.itunestracker.service.view.MainActivity.URL
 public class ArtistVideoViewFragment extends Fragment {
 
     public static final String TAG = "ArtistVideoViewFragment";
+    private static final String BANNER_SCRIPT = "" +
+            "<div style =\"text-align:center;\">" +
+            "<div id='ibb-widget-root'>" +
+            "</div>" +
+            "</div>" +
+            "<script>(function(t,e,i,d){var o=t.getElementById(i)," +
+            "n=t.createElement(e);" +
+            "o.style.height=50;" +
+            "o.style.width=320;" +
+            "o.style.display='inline-block';" +
+            "n.id='ibb-widget'," +
+            "n.setAttribute('src',('https:'===t.location.protocol?'https://':'http://')+d)," +
+            "n.setAttribute('width','320')," +
+            "n.setAttribute('height','50')," +
+            "n.setAttribute('frameborder','0')," +
+            "n.setAttribute('scrolling','no'),o.appendChild(n)})" +
+            "(document,'iframe','ibb-widget-root',\"banners.itunes.apple.com/banner.html?" +
+            "partnerId=" +
+            "&aId=" +
+            "&bt=promotional" +
+            "&at=Music" +
+            "&st=apple_music" +
+            "&c=jp" +
+            "&l=ja-JP" +
+            "&w=320" +
+            "&h=50" +
+            "&rs=1\");" +
+            "</script>";
 
     @Nullable
     @Override
@@ -41,44 +69,27 @@ public class ArtistVideoViewFragment extends Fragment {
         videoView.setVideoURI(Uri.parse(url));
         videoView.start();
         videoView.setMediaController(new MediaController(v.getContext()));
-        int baseWidth = videoView.getMeasuredWidth();
 
-        setHtmlBanner(v, getAfiScript(baseWidth));
+        WebView webview = (WebView) v.findViewById(R.id.web_view);
+
+        setHtmlBanner(webview, getAfiScript());
 
         return v;
     }
 
-    private void setHtmlBanner(View v, String data) {
-        WebView webview = (WebView) v.findViewById(R.id.web_view);
+    private void setHtmlBanner(WebView v, String data) {
         WebChromeClient client = new WebChromeClient();
 
-        WebSettings settings = webview.getSettings();
+        WebSettings settings = v.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);
 
-        webview.setWebChromeClient(client);
-        webview.setForegroundGravity(Gravity.CENTER);
-        webview.loadData(
+        v.setWebChromeClient(client);
+        v.loadData(
                 data, "text/html", null);
     }
 
-    private String getAfiScript(int baseWidth) {
-
-        String banner_script = "<div id='ibb-widget-root'></div>" +
-                "<script>(function(t,e,i,d){var o=t.getElementById(i),n=t.createElement(e);" +
-                "o.style.height=50;" +
-                "o.style.width=320;" +
-                "o.style.display='inline-block';" +
-                "n.id='ibb-widget',n.setAttribute('src',('https:'===t.location.protocol?'https://':'http://')+d)," +
-                "n.setAttribute('width','320')," +
-                "n.setAttribute('height','50')," +
-                "n.setAttribute('frameborder','10')," +
-                "n.setAttribute('scrolling','no')," +
-                "o.appendChild(n)})(document,'iframe','ibb-widget-root',\"" +
-                "banners.itunes.apple.com/banner.html?partnerId=&aId=1001lMax" +
-                "&bt=promotional&at=Music&st=apple_music&c=us&l=en-US&w=320&h=50&rs=1\");" +
-                "</script>";
-
-        return banner_script;
+    private String getAfiScript() {
+        return BANNER_SCRIPT;
     }
 }

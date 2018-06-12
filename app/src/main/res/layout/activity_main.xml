@@ -1,38 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_theme"
     android:orientation="vertical">
 
-    <LinearLayout
+    <include
+        android:id="@+id/header"
+        layout="@layout/material_header_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
         android:orientation="vertical">
-        <include
-            android:id="@+id/header"
-            layout="@layout/material_header_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            app:tabSelectedTextColor="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorAccent"
-            app:tabTextColor="@color/colorPrimaryDark"
-            app:tabIndicatorColor="@color/colorWhite"
-            android:elevation="4dp" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
-</FrameLayout>
+
+
+</RelativeLayout>

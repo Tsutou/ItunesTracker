@@ -5,7 +5,6 @@
     style="@style/ToolBarLayoutStyle"
     app:elevation="0dp">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/ToolBarStyle">
