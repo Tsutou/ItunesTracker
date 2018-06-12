@@ -17,12 +17,14 @@ import com.example.nijimac103.itunestracker.service.util.LocationUtil;
 import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistListFragment;
 import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistVideoViewFragment;
 import com.example.nijimac103.itunestracker.service.view.adapter.ArtistViewPagerAdapter;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import static android.text.TextUtils.isEmpty;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String URL = "URL";
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            ArtistListFragment fragment = new ArtistListFragment();
-
             seUpViewPager();
-
         }
+
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+
+        stopShimmerText();
     }
 
+    //ViewPagerの設定
     public void seUpViewPager() {
         ArtistViewPagerAdapter adapter = new ArtistViewPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -56,5 +60,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "This Video has not Preview", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void startShimmerText(){
+        this.mShimmerViewContainer.startShimmer();
+    }
+
+    public void stopShimmerText(){
+        this.mShimmerViewContainer.stopShimmer();
     }
 }

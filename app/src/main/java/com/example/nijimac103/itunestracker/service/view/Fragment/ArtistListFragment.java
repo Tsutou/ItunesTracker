@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,14 @@ import com.example.nijimac103.itunestracker.service.view.MainActivity;
 import com.example.nijimac103.itunestracker.service.view.adapter.ArtistAdapter;
 import com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ArtistListFragment extends Fragment {
     public static final String TAG = "ArtistListFragment";
     private ArtistAdapter artistListAdapter;
     private FragmentArtistListBinding binding;
+    private boolean isTyping = false;
 
     @Nullable
     @Override
@@ -55,6 +59,7 @@ public class ArtistListFragment extends Fragment {
 
         observeViewModel(viewModel, false);
 
+        //TextChangeListnerセット
         binding.searchArtist.addTextChangedListener(getArtistWatcher(viewModel));
     }
 
@@ -86,15 +91,45 @@ public class ArtistListFragment extends Fragment {
         final TextWatcher artistWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (2 < count && count < 21 ) {
-                    viewModel.reloadArtists(s.toString());
-                    observeViewModel(viewModel, true);
+            private Timer timer = new Timer();
+            private final long DELAY = 500; // milliseconds
+
+            @Override
+            public void onTextChanged(final CharSequence s, int start, int before, final int count) {
+
+
+                if (!isTyping) {
+                    Log.d("監視", "started typing");
+                    // Send notification for start typing event
+                    isTyping = true;
                 }
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(
+                        new TimerTask() {
+                            @Override
+                            public void run() {
+                                isTyping = false;
+                                //タイピングが500ms停止したらArtistのReloadを実行
+                                Log.d("監視", "stopped typing");
+                                //send notification for stopped typing event
+
+                                if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+
+                                    viewModel.reloadArtists(s.toString());
+                                    observeViewModel(viewModel, true);
+
+                                }
+                            }
+                        },
+                        DELAY
+                );
+
+
             }
 
             @Override

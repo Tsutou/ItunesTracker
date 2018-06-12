@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.nijimac103.itunestracker.R;
+import com.example.nijimac103.itunestracker.service.view.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -23,5 +24,5 @@ public class CustomBindingAdapter {
                 .transform(new CropCircleTransformation())
                 .into(view);
     }
-}
 
+}
