@@ -8,14 +8,24 @@ import android.util.Log;
 
 import com.example.nijimac103.itunestracker.service.model.ArtistList;
 import com.example.nijimac103.itunestracker.service.repository.ArtistRepository;
+import com.example.nijimac103.itunestracker.service.util.CalcUtils;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import static com.example.nijimac103.itunestracker.service.util.CalcUtils.getRand;
 
 
 public class ArtistListViewModel extends AndroidViewModel {
 
+    public static final int DELAY_MINUTES = 60000;
+    public static final String MUSIC_VIDEO = "musicVideo";
     private LiveData<ArtistList> artistListObservable;
     private ArtistRepository repo;
-    private int LIMIT = 50;
+    private int LIMIT = 30;
     private int count;
+    //TODO:決め打ちでなく、rankingからとってきてTrendとしてもいいかも
+    private String[] defaultArtists = {"aliciakeys","ladygaga","caroleking","beatles","jamestaylor","ericclapton","beyonce","jamesbrown"};
 
     public ArtistListViewModel(Application application) {
         super(application);
@@ -24,21 +34,21 @@ public class ArtistListViewModel extends AndroidViewModel {
 
         repo = ArtistRepository.getInstance();
 
-        artistListObservable = repo.getArtistList("sample", "musicVideo",LIMIT);
+        artistListObservable = repo.getArtistList(defaultArtists[getRand(7)], MUSIC_VIDEO, LIMIT);
     }
 
     //LiveDataのゲッター
-    public LiveData<ArtistList> getArtistListObservable(){
+    public LiveData<ArtistList> getArtistListObservable() {
 
         return artistListObservable;
     }
 
-    public void reloadArtists(CharSequence text){
+    public void reloadArtists(CharSequence text) {
         if (count <= 20) {
             artistListObservable = repo.getArtistList(text.toString(), "musicVideo", LIMIT);
-            count += 1;
+            count++;
         } else {
-            Log.d("監視",count + "制限超過");
+            Log.d("監視", count + "制限超過");
         }
     }
 
@@ -56,8 +66,9 @@ public class ArtistListViewModel extends AndroidViewModel {
                     Log.d("監視", count + "だから安全");
                 }
                 count = 0;
-                handler.postDelayed(this,60000);
+                handler.postDelayed(this, DELAY_MINUTES);
             }
-        }, 60000);
+        }, DELAY_MINUTES);
     }
+
 }

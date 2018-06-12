@@ -58,7 +58,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
                     Artist artist = artistList.get(newItemPosition);
                     Artist old = artistList.get(oldItemPosition);
 
-                    return artist.trackId == old.trackId && Objects.equals(artist.previewUrl, old.previewUrl) && !isReload;
+                    return artist.trackId == old.trackId && Objects.equals(artist.previewUrl, old.previewUrl) && isReload;
                 }
             });
 
