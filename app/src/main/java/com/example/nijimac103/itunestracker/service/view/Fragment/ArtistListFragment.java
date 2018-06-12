@@ -94,7 +94,6 @@ public class ArtistListFragment extends Fragment {
 
             }
 
-
             private Timer timer = new Timer();
             private final long DELAY = 500; // milliseconds
 
@@ -104,7 +103,7 @@ public class ArtistListFragment extends Fragment {
 
                 if (!isTyping) {
                     Log.d("監視", "started typing");
-                    // Send notification for start typing event
+
                     isTyping = true;
                 }
                 timer.cancel();
@@ -116,7 +115,6 @@ public class ArtistListFragment extends Fragment {
                                 isTyping = false;
                                 //タイピングが500ms停止したらArtistのReloadを実行
                                 Log.d("監視", "stopped typing");
-                                //send notification for stopped typing event
 
                                 if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
 
@@ -137,6 +135,7 @@ public class ArtistListFragment extends Fragment {
 
             }
         };
+
         return artistWatcher;
     }
 
