@@ -24,7 +24,7 @@ public class ArtistListViewModel extends AndroidViewModel {
     private int count;
 
     //TODO:決め打ちでなく、rankingからとってきてTrendとしてもいいかも
-    private String[] defaultArtists = {"aliciakeys","ladygaga","caroleking","beatles","jamestaylor","ericclapton","beyonce","jamesbrown"};
+    private String[] defaultArtists = {"alicia keys","lady gaga","michael jackson","beatles","stevie wonder","eric clapton","beyonce","james brown"};
 
     public ArtistListViewModel(Application application) {
         super(application);
