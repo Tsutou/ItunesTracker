@@ -9,12 +9,16 @@ import com.example.nijimac103.itunestracker.R;
 import com.example.nijimac103.itunestracker.service.model.Artist;
 import com.example.nijimac103.itunestracker.service.util.FragmentUtils;
 import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistListFragment;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import static android.text.TextUtils.isEmpty;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String URL = "URL";
+    private AdView mAdViewHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
                     fragment,
                     ArtistListFragment.TAG);
         }
+
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+
+        mAdViewHeader = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdViewHeader.loadAd(adRequest);
 
     }
 

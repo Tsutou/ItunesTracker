@@ -65,6 +65,9 @@ dependencies {
     //editText
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
+    //Admob
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
+
 //    //Toolbar decoration
 //    implementation 'com.facebook.shimmer:shimmer:0.2.0'
 }
