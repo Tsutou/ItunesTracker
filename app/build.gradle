@@ -68,6 +68,11 @@ dependencies {
     //Admob
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
 
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
 //    //Toolbar decoration
 //    implementation 'com.facebook.shimmer:shimmer:0.2.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
