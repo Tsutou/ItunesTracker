@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.viewModel;
+package jp.co.geisha.itunestracker.service.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,10 +6,10 @@ import android.arch.lifecycle.LiveData;
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.nijimac103.itunestracker.service.model.ArtistList;
-import com.example.nijimac103.itunestracker.service.repository.ArtistRepository;
+import jp.co.geisha.itunestracker.service.model.ArtistList;
+import jp.co.geisha.itunestracker.service.repository.ArtistRepository;
 
-import static com.example.nijimac103.itunestracker.service.util.CalcUtils.getRand;
+import static jp.co.geisha.itunestracker.service.util.CalcUtils.getRand;
 
 
 public class ArtistListViewModel extends AndroidViewModel {

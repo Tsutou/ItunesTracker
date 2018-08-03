@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.util;
+package jp.co.geisha.itunestracker.service.util;
 
 import java.util.Random;
 

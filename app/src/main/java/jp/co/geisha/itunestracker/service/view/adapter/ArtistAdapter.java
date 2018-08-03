@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.view.adapter;
+package jp.co.geisha.itunestracker.service.view.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -7,10 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.nijimac103.itunestracker.R;
-import com.example.nijimac103.itunestracker.databinding.ArtistListItemBinding;
-import com.example.nijimac103.itunestracker.service.callback.ArtistClickCallback;
-import com.example.nijimac103.itunestracker.service.model.Artist;
+import jp.co.geisha.itunestracker.R;
+import jp.co.geisha.itunestracker.databinding.ArtistListItemBinding;
+import jp.co.geisha.itunestracker.service.callback.ArtistClickCallback;
+import jp.co.geisha.itunestracker.service.model.Artist;
 
 import java.util.List;
 import java.util.Objects;

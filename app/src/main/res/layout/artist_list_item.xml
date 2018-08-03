@@ -7,11 +7,11 @@
 
         <variable
             name="artist"
-            type="com.example.nijimac103.itunestracker.service.model.Artist" />
+            type="jp.co.geisha.itunestracker.service.model.Artist" />
 
         <variable
             name="callback"
-            type="com.example.nijimac103.itunestracker.service.callback.ArtistClickCallback" />
+            type="jp.co.geisha.itunestracker.service.callback.ArtistClickCallback" />
     </data>
 
 

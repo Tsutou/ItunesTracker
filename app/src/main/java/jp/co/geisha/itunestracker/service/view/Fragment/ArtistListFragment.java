@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.view.Fragment;
+package jp.co.geisha.itunestracker.service.view.Fragment;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
@@ -14,14 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.nijimac103.itunestracker.R;
-import com.example.nijimac103.itunestracker.databinding.FragmentArtistListBinding;
-import com.example.nijimac103.itunestracker.service.callback.ArtistClickCallback;
-import com.example.nijimac103.itunestracker.service.model.Artist;
-import com.example.nijimac103.itunestracker.service.model.ArtistList;
-import com.example.nijimac103.itunestracker.service.view.MainActivity;
-import com.example.nijimac103.itunestracker.service.view.adapter.ArtistAdapter;
-import com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel;
+import jp.co.geisha.itunestracker.R;
+import jp.co.geisha.itunestracker.databinding.FragmentArtistListBinding;
+import jp.co.geisha.itunestracker.service.callback.ArtistClickCallback;
+import jp.co.geisha.itunestracker.service.model.Artist;
+import jp.co.geisha.itunestracker.service.model.ArtistList;
+import jp.co.geisha.itunestracker.service.view.MainActivity;
+import jp.co.geisha.itunestracker.service.view.adapter.ArtistAdapter;
+import jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;

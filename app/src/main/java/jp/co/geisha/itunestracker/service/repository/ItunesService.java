@@ -1,7 +1,7 @@
-package com.example.nijimac103.itunestracker.service.repository;
+package jp.co.geisha.itunestracker.service.repository;
 
-import com.example.nijimac103.itunestracker.service.model.Artist;
-import com.example.nijimac103.itunestracker.service.model.ArtistList;
+import jp.co.geisha.itunestracker.service.model.Artist;
+import jp.co.geisha.itunestracker.service.model.ArtistList;
 
 import java.util.List;
 

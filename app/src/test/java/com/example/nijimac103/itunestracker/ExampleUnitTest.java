@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker;
+package jp.co.geisha.itunestracker;
 
 import org.junit.Test;
 

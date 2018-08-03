@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.util;
+package jp.co.geisha.itunestracker.service.util;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.example.nijimac103.itunestracker.R;
+import jp.co.geisha.itunestracker.R;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

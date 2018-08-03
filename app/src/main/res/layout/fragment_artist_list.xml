@@ -5,7 +5,7 @@
 
     <data>
         <variable name="isLoading" type="boolean" />
-        <variable name="viewModel" type="com.example.nijimac103.itunestracker.service.viewModel.ArtistListViewModel" />
+        <variable name="viewModel" type="jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel" />
     </data>
 
     <LinearLayout

@@ -1,14 +1,14 @@
-package com.example.nijimac103.itunestracker.service.view;
+package jp.co.geisha.itunestracker.service.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.example.nijimac103.itunestracker.R;
-import com.example.nijimac103.itunestracker.service.model.Artist;
-import com.example.nijimac103.itunestracker.service.util.FragmentUtils;
-import com.example.nijimac103.itunestracker.service.view.Fragment.ArtistListFragment;
+import jp.co.geisha.itunestracker.R;
+import jp.co.geisha.itunestracker.service.model.Artist;
+import jp.co.geisha.itunestracker.service.util.FragmentUtils;
+import jp.co.geisha.itunestracker.service.view.Fragment.ArtistListFragment;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;

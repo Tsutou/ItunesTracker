@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.model;
+package jp.co.geisha.itunestracker.service.model;
 
 import com.google.gson.annotations.SerializedName;
 

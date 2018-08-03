@@ -1,4 +1,4 @@
-package com.example.nijimac103.itunestracker.service.view.Fragment;
+package jp.co.geisha.itunestracker.service.view.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,16 +14,16 @@ import android.webkit.WebView;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import com.example.nijimac103.itunestracker.R;
-import com.example.nijimac103.itunestracker.service.util.FragmentUtils;
-import com.example.nijimac103.itunestracker.service.util.WindowUtils;
+import jp.co.geisha.itunestracker.R;
+import jp.co.geisha.itunestracker.service.util.FragmentUtils;
+import jp.co.geisha.itunestracker.service.util.WindowUtils;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-import static com.example.nijimac103.itunestracker.service.view.MainActivity.URL;
+import static jp.co.geisha.itunestracker.service.view.MainActivity.URL;
 
 public class ArtistVideoViewFragment extends Fragment {
 
