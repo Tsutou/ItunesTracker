@@ -5,8 +5,11 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,7 +38,7 @@ public class ArtistListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(
-            LayoutInflater inflater,
+            @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
@@ -43,6 +46,7 @@ public class ArtistListFragment extends Fragment {
 
         artistListAdapter = new ArtistAdapter(artistClickCallback);
 
+        binding.artistList.setHasFixedSize(true);
         binding.artistList.setAdapter(artistListAdapter);
 
         binding.setIsLoading(true);
@@ -59,8 +63,21 @@ public class ArtistListFragment extends Fragment {
 
         observeViewModel(viewModel, false);
 
+
+        binding.swipeContainer.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorWhite);
+        binding.swipeContainer.setRefreshing(true);
         //TextChangeListnerセット
         binding.searchArtist.addTextChangedListener(getArtistWatcher(viewModel));
+
+        // スワイプダウンの処理
+        binding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                binding.swipeContainer.setRefreshing(true);
+                viewModel.reloadArtists(binding.searchArtist.getText());
+                observeViewModel(viewModel, true);
+            }
+        });
     }
 
     private void observeViewModel(ArtistListViewModel viewModel, final Boolean isReload) {
@@ -72,6 +89,7 @@ public class ArtistListFragment extends Fragment {
                     binding.setIsLoading(false);
                     artistListAdapter.setArtistList(artists.results, isReload);
                 }
+                binding.swipeContainer.setRefreshing(false);
             }
         });
     }
@@ -84,7 +102,6 @@ public class ArtistListFragment extends Fragment {
             }
         }
     };
-
 
     public TextWatcher getArtistWatcher(final ArtistListViewModel viewModel) {
 

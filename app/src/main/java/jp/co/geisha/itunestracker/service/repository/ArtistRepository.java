@@ -9,6 +9,7 @@ import jp.co.geisha.itunestracker.service.model.ArtistList;
 import com.google.gson.JsonElement;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -30,7 +31,11 @@ public class ArtistRepository {
         //ログ用
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .connectTimeout(100, TimeUnit.SECONDS)
+                .readTimeout(100, TimeUnit.SECONDS)
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ItunesService.HTTPS_API_ITUNES_URL)
@@ -57,7 +62,7 @@ public class ArtistRepository {
         itunesService.getArtistList(artistName, entity, limit).enqueue(new Callback<ArtistList>() {
             @Override
             public void onResponse(Call<ArtistList> call, Response<ArtistList> response) {
-                simulateDelay();
+
                 Log.d("出てる？？？",response.body().toString());
                 data.setValue(response.body());
 

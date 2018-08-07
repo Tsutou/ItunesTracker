@@ -4,8 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="isLoading" type="boolean" />
-        <variable name="viewModel" type="jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="viewModel"
+            type="jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel" />
     </data>
 
     <LinearLayout
@@ -18,11 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
             android:text="Now Loading"
             android:textAlignment="center"
-            app:visibleGone="@{isLoading}"/>
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:visibleGone="@{isLoading}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,32 +40,46 @@
                 android:id="@+id/search_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:singleLine="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:autoSizeTextType="uniform"
+                android:gravity="center_horizontal"
                 android:hint="Please enter your loved musician"
-                app:met_floatingLabelText="Enjoy Reactive MusicVideo Trackinig!"
-                app:met_maxCharacters="20"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textStyle="bold"
                 app:met_baseColor="#fff"
-                app:met_primaryColor="#fff"
                 app:met_errorColor="#fff"
-                app:met_textColor="#fff"
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelPadding="@dimen/bottom_text_size"
+                app:met_floatingLabelText="Enjoy Reactive MusicVideo Trackinig!"
                 app:met_hideUnderline="true"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:textAlignment="center"/>
+                app:met_maxCharacters="20"
+                app:met_primaryColor="#fff"
+                app:met_textColor="#fff" />
 
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/artist_list"
-                android:contentDescription="Artist List"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="LinearLayoutManager"
-                />
+                android:layout_height="match_parent">
+
+                <!-- RecyclerViewの先頭要素のheightが 0dpの時に SwipeRefreshが機能しないので
+                 FrameLayoutで囲う対応を行う
+                  https://github.com/airbnb/epoxy/issues/74 -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/artist_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Artist List"
+                        app:layoutManager="LinearLayoutManager" />
+
+                </FrameLayout>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 

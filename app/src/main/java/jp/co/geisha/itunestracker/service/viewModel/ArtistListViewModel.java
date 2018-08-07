@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import jp.co.geisha.itunestracker.service.model.ArtistList;
@@ -14,17 +15,53 @@ import static jp.co.geisha.itunestracker.service.util.CalcUtils.getRand;
 
 public class ArtistListViewModel extends AndroidViewModel {
 
-    public static final int DELAY_MINUTES = 60000;
-    public static final int MAX_REQUEST_PER_MINUTE = 20;
-    private int LIMIT = 30;
-    public static final int ZERO = 0;
-    public static final String MUSIC_VIDEO = "musicVideo";
+    private static final int DELAY_MINUTES = 60000;
+    private static final int MAX_REQUEST_PER_MINUTE = 20;
+    private int LIMIT = 100;
+    private static final int ZERO = 0;
+    private static final String MUSIC_VIDEO = "musicVideo";
     private LiveData<ArtistList> artistListObservable;
     private ArtistRepository repo;
     private int count;
 
     //TODO:決め打ちでなく、rankingからとってきてTrendとしてもいいかも
-    private String[] defaultArtists = {"alicia keys","lady gaga","michael jackson","beatles","stevie wonder","eric clapton","beyonce","james brown"};
+    private String[] defaultArtists =
+            {
+                    "alicia keys",
+                    "lady gaga",
+                    "michael jackson",
+                    "beatles",
+                    "stevie wonder",
+                    "eric clapton",
+                    "beyonce",
+                    "james brown",
+                    "sting",
+                    "oasis",
+                    "2pac",
+                    "Nas",
+                    "bob marley",
+                    "billy joel",
+                    "elton john",
+                    "bruno mars",
+                    "joe",
+                    "justin timberlake",
+                    "TLC",
+                    "SWV",
+                    "blackstreet",
+                    "jackson5",
+                    "ed sheeran",
+                    "boyz 2 men",
+                    "india arie",
+                    "talor swift",
+                    "norah jones",
+                    "frank sinatra",
+                    "marvin gaye",
+                    "mariah carey",
+                    "diana ross",
+                    "jamiroquai",
+                    "john lenon",
+                    "tuxedo"
+            };
 
     public ArtistListViewModel(Application application) {
         super(application);
@@ -33,7 +70,7 @@ public class ArtistListViewModel extends AndroidViewModel {
 
         repo = ArtistRepository.getInstance();
 
-        artistListObservable = repo.getArtistList(defaultArtists[getRand(7)], MUSIC_VIDEO, LIMIT);
+        artistListObservable = repo.getArtistList(defaultArtists[getRand(defaultArtists.length)], MUSIC_VIDEO, LIMIT);
     }
 
     //LiveDataのゲッター
@@ -44,8 +81,12 @@ public class ArtistListViewModel extends AndroidViewModel {
 
     public void reloadArtists(CharSequence text) {
         if (count <= MAX_REQUEST_PER_MINUTE) {
-            artistListObservable = repo.getArtistList(text.toString(), "musicVideo", LIMIT);
-            count++;
+            if (TextUtils.isEmpty(text)) {
+                artistListObservable = repo.getArtistList(defaultArtists[getRand(defaultArtists.length)], MUSIC_VIDEO, LIMIT);
+            } else {
+                artistListObservable = repo.getArtistList(text.toString(), "musicVideo", LIMIT);
+                count++;
+            }
         } else {
             Log.d("監視", count + "制限超過");
         }
