@@ -7,8 +7,12 @@
             android:shape="rectangle"
             android:top="10dp">
 
-            <!-- 背景色 -->
-            <solid android:color="@color/colorPrimary" />
+            <gradient
+                android:angle="225"
+                android:centerColor="#8B8FE3"
+                android:endColor="#BD2F61"
+                android:startColor="#97F9E5"
+                android:type="linear" />
 
             <!-- 角丸 -->
             <corners
@@ -16,7 +20,7 @@
                 android:topRightRadius="3dp" />
 
             <stroke
-                android:color="@android:color/darker_gray"
+                android:color="@color/colorWhite"
                 android:width="1dp" />
 
         </shape>

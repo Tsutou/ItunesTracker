@@ -103,7 +103,7 @@ class DigginTabLayoutManager(private val inflater: LayoutInflater?,
 
         tabText.setTextAppearance(R.style.TextAppearance_Tabs_Selected)
 
-        tabLine.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        tabLine.setBackgroundResource(R.drawable.main_theme)
     }
 
     /**
@@ -136,7 +136,6 @@ class DigginTabLayoutManager(private val inflater: LayoutInflater?,
         tabs.getChildAt(position).setBackgroundResource(R.drawable.shape_unselect_tab_rounded_corners)
 
         tabText.setTextAppearance(R.style.TextAppearance_Tabs)
-
     }
 
     /**
