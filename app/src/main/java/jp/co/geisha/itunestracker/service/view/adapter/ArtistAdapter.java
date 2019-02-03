@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
 
-    List<? extends Artist> artistList;
+    private List<? extends Artist> artistList;
 
     @Nullable
     private final ArtistClickCallback artistClickCallback;

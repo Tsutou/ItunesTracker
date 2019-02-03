@@ -55,8 +55,8 @@ public class FragmentUtils {
 
     public static String getArgsOfPreFragment(Fragment fragment, String key) {
         Bundle bundle = fragment.getArguments();
-        String url = bundle.getString(key);
+        assert bundle != null;
 
-        return url;
+        return bundle.getString(key);
     }
 }

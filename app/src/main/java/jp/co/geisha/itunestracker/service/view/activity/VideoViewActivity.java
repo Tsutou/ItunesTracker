@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.service.view;
+package jp.co.geisha.itunestracker.service.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import jp.co.geisha.itunestracker.R;
 import jp.co.geisha.itunestracker.service.util.FragmentUtils;
-import jp.co.geisha.itunestracker.service.view.Fragment.ArtistVideoViewFragment;
+import jp.co.geisha.itunestracker.service.view.fragment.ArtistVideoViewFragment;
 
-import static jp.co.geisha.itunestracker.service.view.MainActivity.URL;
+import static jp.co.geisha.itunestracker.service.view.activity.MainActivity.URL;
 
 public class VideoViewActivity extends AppCompatActivity {
 

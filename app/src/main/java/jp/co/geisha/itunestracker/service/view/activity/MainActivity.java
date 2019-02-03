@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.service.view;
+package jp.co.geisha.itunestracker.service.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import android.widget.Toast;
 import jp.co.geisha.itunestracker.R;
 import jp.co.geisha.itunestracker.service.model.Artist;
 import jp.co.geisha.itunestracker.service.util.FragmentUtils;
-import jp.co.geisha.itunestracker.service.view.Fragment.ArtistListFragment;
+import jp.co.geisha.itunestracker.service.view.fragment.ArtistListFragment;
+import jp.co.geisha.itunestracker.service.view.fragment.ArtistTabsFragment;
 
 import static android.text.TextUtils.isEmpty;
 
@@ -23,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
 
-            ArtistListFragment fragment = new ArtistListFragment();
+            ArtistTabsFragment fragment = new ArtistTabsFragment();
 
             FragmentUtils.insertFragmentToActivity(
                     R.id.fragment_container,
                     getSupportFragmentManager(),
                     fragment,
-                    ArtistListFragment.TAG);
+                    ArtistTabsFragment.Companion.getARTIST_TABS_TAG());
         }
 
     }

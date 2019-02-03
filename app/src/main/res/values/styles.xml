@@ -40,4 +40,23 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <!-- タブ通常時 -->
+    <style name="TextAppearance_Tabs">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- タブ選択時 -->
+    <style name="TextAppearance_Tabs_Selected">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+
 </resources>

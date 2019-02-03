@@ -9,6 +9,7 @@ import android.util.Log;
 
 import jp.co.geisha.itunestracker.service.model.ArtistList;
 import jp.co.geisha.itunestracker.service.repository.ArtistRepository;
+import timber.log.Timber;
 
 import static jp.co.geisha.itunestracker.service.util.CalcUtils.getRand;
 
@@ -88,7 +89,7 @@ public class ArtistListViewModel extends AndroidViewModel {
                 count++;
             }
         } else {
-            Log.d("監視", count + "制限超過");
+            Timber.d("%s制限超過", count);
         }
     }
 
@@ -101,10 +102,8 @@ public class ArtistListViewModel extends AndroidViewModel {
             public void run() {
                 // UIスレッド
                 if (count > MAX_REQUEST_PER_MINUTE) {
-                    Log.d("監視", count + "だから危険");
-                } else {
-                    Log.d("監視", count + "だから安全");
-                }
+                    Timber.d("%sだから危険", count);
+                } else Timber.d("%sだから安全", count);
                 count = ZERO;
                 handler.postDelayed(this, DELAY_MINUTES);
             }

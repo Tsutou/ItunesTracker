@@ -1,11 +1,10 @@
-package jp.co.geisha.itunestracker.service.view.Fragment;
+package jp.co.geisha.itunestracker.service.view.fragment;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,10 +21,12 @@ import jp.co.geisha.itunestracker.databinding.FragmentArtistListBinding;
 import jp.co.geisha.itunestracker.service.callback.ArtistClickCallback;
 import jp.co.geisha.itunestracker.service.model.Artist;
 import jp.co.geisha.itunestracker.service.model.ArtistList;
-import jp.co.geisha.itunestracker.service.view.MainActivity;
+import jp.co.geisha.itunestracker.service.view.activity.MainActivity;
 import jp.co.geisha.itunestracker.service.view.adapter.ArtistAdapter;
 import jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel;
+import timber.log.Timber;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,7 +43,7 @@ public class ArtistListFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_list, container, false);
+        binding = DataBindingUtil.inflate(Objects.requireNonNull(inflater), R.layout.fragment_artist_list, container, false);
 
         artistListAdapter = new ArtistAdapter(artistClickCallback);
 
@@ -66,6 +67,7 @@ public class ArtistListFragment extends Fragment {
 
         binding.swipeContainer.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorWhite);
         binding.swipeContainer.setRefreshing(true);
+
         //TextChangeListnerセット
         binding.searchArtist.addTextChangedListener(getArtistWatcher(viewModel));
 
@@ -98,14 +100,14 @@ public class ArtistListFragment extends Fragment {
         @Override
         public void onClick(Artist artist) {
             if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                ((MainActivity) getActivity()).show(artist);
+                ((MainActivity) Objects.requireNonNull(getActivity())).show(artist);
             }
         }
     };
 
     public TextWatcher getArtistWatcher(final ArtistListViewModel viewModel) {
 
-        final TextWatcher artistWatcher = new TextWatcher() {
+        return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -119,7 +121,7 @@ public class ArtistListFragment extends Fragment {
 
 
                 if (!isTyping) {
-                    Log.d("監視", "started typing");
+                    Timber.d("started typing");
 
                     isTyping = true;
                 }
@@ -131,7 +133,7 @@ public class ArtistListFragment extends Fragment {
                             public void run() {
                                 isTyping = false;
                                 //タイピングが500ms停止したらArtistのReloadを実行
-                                Log.d("監視", "stopped typing");
+                                Timber.d("stopped typing");
 
                                 if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
 
@@ -152,8 +154,6 @@ public class ArtistListFragment extends Fragment {
 
             }
         };
-
-        return artistWatcher;
     }
 
 }
