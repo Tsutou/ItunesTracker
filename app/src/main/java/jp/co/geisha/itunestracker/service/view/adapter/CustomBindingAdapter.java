@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import jp.co.geisha.itunestracker.R;
+import jp.co.geisha.itunestracker.service.util.PicassoUtil;
 import jp.co.geisha.itunestracker.service.view.MainActivity;
+
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -19,10 +21,7 @@ public class CustomBindingAdapter {
 
     @BindingAdapter("imageUrl")
     public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.with(view.getContext())
-                .load(imageUrl)
-                .transform(new CropCircleTransformation())
-                .into(view);
+        PicassoUtil.INSTANCE.loadPicassoWithCropCircleTransformation(imageUrl, view);
     }
 
 }

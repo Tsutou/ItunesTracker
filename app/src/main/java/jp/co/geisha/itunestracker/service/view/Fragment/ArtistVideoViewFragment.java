@@ -1,5 +1,6 @@
 package jp.co.geisha.itunestracker.service.view.Fragment;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,18 +17,10 @@ import android.widget.VideoView;
 
 import jp.co.geisha.itunestracker.R;
 import jp.co.geisha.itunestracker.service.util.FragmentUtils;
-import jp.co.geisha.itunestracker.service.util.WindowUtils;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import static jp.co.geisha.itunestracker.service.view.MainActivity.URL;
 
 public class ArtistVideoViewFragment extends Fragment {
-
-    private AdView mAdView;
 
     public static final String TAG = "ArtistVideoViewFragment";
     private static final String BANNER_SCRIPT = "" +
@@ -81,43 +74,10 @@ public class ArtistVideoViewFragment extends Fragment {
 
         setHtmlBanner(webview, getAfiScript());
 
-        mAdView = v.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
-
         return v;
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void setHtmlBanner(WebView v, String data) {
         WebChromeClient client = new WebChromeClient();
 

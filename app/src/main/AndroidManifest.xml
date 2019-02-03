@@ -29,8 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".service.view.VideoViewActivity"/>
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
 
 </manifest>

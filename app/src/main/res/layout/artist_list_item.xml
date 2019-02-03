@@ -17,7 +17,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginEnd="@dimen/item_horizontal_margin"
         android:layout_marginStart="@dimen/item_horizontal_margin"
         android:background="@drawable/main_theme"
@@ -34,13 +34,13 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/item_horizontal_margin"
                 android:layout_marginStart="@dimen/item_horizontal_margin"
                 android:layout_weight="3"
                 android:orientation="vertical"
                 android:padding="5dp">
-
 
                 <TextView
                     android:id="@+id/name"
@@ -51,7 +51,6 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
 
                 <TextView
                     android:id="@+id/languages"
