@@ -17,8 +17,12 @@ public interface ItunesService {
     @GET("search")
     Call <ArtistList> getArtistList(@Query("term") String artist, @Query("entity") String entity, @Query("limit") int limit);
 
-//
-//    //詳細(現状使ってないい)
-//    @GET("/repos/{user}/{reponame}")
-//    Call<Artist> getArtistDetails(@Path("artisitName") String artist,@Path("artistId") String artistName);
+    //一覧
+    @GET("search")
+    Call <ArtistList> getArtistListByGenre(
+            @Query("term") String keyword,
+            @Query("entity") String entity,
+            @Query("genreId") int genreId ,
+            @Query("limit") int limit);
+
 }
