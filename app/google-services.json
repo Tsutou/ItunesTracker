@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_number": "665774973224",
+    "firebase_url": "https://itunestracker-5931e.firebaseio.com",
+    "project_id": "itunestracker-5931e",
+    "storage_bucket": "itunestracker-5931e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665774973224:android:8c7cc923e5de701b",
+        "android_client_info": {
+          "package_name": "jp.co.geisha.itunestracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665774973224-0rtotqa4she1fun4ekc6gn7tuscsj0pr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.co.geisha.itunestracker",
+            "certificate_hash": "ea79d03fa891f96a14a609f51149dd94e42da8b5"
+          }
+        },
+        {
+          "client_id": "665774973224-47918dq46ms42vfqqkefkmn9sd34erkf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.co.geisha.itunestracker",
+            "certificate_hash": "ea3daa402720c41226f101be669c1e200e87bd12"
+          }
+        },
+        {
+          "client_id": "665774973224-ibhl35tf8oni9ev9lacscea92tmqfbek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXFncsGgF55vdj-hE2qIgvZ5Wiv_A5q_4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665774973224-ibhl35tf8oni9ev9lacscea92tmqfbek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-5652455550009177~7659924442"
+    }
+  ],
+  "configuration_version": "1"
+}

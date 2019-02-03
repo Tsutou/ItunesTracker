@@ -25,7 +25,7 @@ public class ArtistRepository {
 
     private static ArtistRepository artistRepository;
 
-    //Retrofitクライアントのコンストラクタ
+    //Retrofitクライアントのコンストラクタ//
     private ArtistRepository() {
 
         //ログ用
