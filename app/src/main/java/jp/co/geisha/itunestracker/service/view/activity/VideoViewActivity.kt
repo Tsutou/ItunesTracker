@@ -1,0 +1,35 @@
+package jp.co.geisha.itunestracker.service.view.activity
+
+import android.content.Intent
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+
+import jp.co.geisha.itunestracker.R
+import jp.co.geisha.itunestracker.service.util.FragmentUtils
+import jp.co.geisha.itunestracker.service.view.fragment.ArtistVideoViewFragment
+
+import jp.co.geisha.itunestracker.service.ARTIST_VIDEO_VIEW_FRAGMENT_TAG
+import jp.co.geisha.itunestracker.service.URL
+
+class VideoViewActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_video_view)
+
+        val fragment = ArtistVideoViewFragment()
+
+        val i = intent
+        val artistPreviewUrl = i.getStringExtra(URL)
+
+        addVideoViewFragment(fragment, artistPreviewUrl)
+    }
+
+    private fun addVideoViewFragment(fragment: ArtistVideoViewFragment, artistPreviewUrl: String) {
+
+        FragmentUtils.setArgsToFragment(fragment, URL, artistPreviewUrl)
+
+        FragmentUtils.insertFragmentToActivity(R.id.fragment_container, supportFragmentManager, fragment, ARTIST_VIDEO_VIEW_FRAGMENT_TAG)
+    }
+
+}

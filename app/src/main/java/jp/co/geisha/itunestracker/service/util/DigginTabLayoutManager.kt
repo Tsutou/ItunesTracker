@@ -12,11 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import jp.co.geisha.itunestracker.R
+import jp.co.geisha.itunestracker.service.ONLY_DEFAULT_TAB
+import jp.co.geisha.itunestracker.service.TAB_START_POSITION
 import kotlinx.android.synthetic.main.tab_layout.view.*
 import timber.log.Timber
-
-const val TAB_START_POSITION = 0
-const val ONLY_DEFAULT_TAB = 1
 
 /**
  * タブレイアウトのUIを制御するクラス
@@ -178,7 +177,7 @@ class DigginTabLayoutManager(private val inflater: LayoutInflater?,
 
                     setActive(tabTitle, tab.position, requireNotNull(tabLine))
 
-                    Timber.d("addOnTabSelectedListener:onTabSelected:" + tabTitle.text)
+                    Timber.d("addOnTabSelectedListener:onTabSelected:%s", tabTitle.text)
                 }
 
             }
@@ -190,7 +189,7 @@ class DigginTabLayoutManager(private val inflater: LayoutInflater?,
                     val tabTitle = view.findViewById<TextView>(R.id.tab_title)
 
                     setInActive(tabTitle, tab.position, requireNotNull(tabLine))
-                    Timber.d("addOnTabSelectedListener:onTabUnselected:" + tabTitle.text)
+                    Timber.d("addOnTabSelectedListener:onTabUnselected:%s", tabTitle.text)
                 }
 
             }

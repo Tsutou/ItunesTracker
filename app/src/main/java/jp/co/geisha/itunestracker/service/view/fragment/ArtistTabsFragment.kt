@@ -13,16 +13,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import jp.co.geisha.itunestracker.R
+import jp.co.geisha.itunestracker.service.ConstArrays.TAB_ROWS
+import jp.co.geisha.itunestracker.service.TARGET_POSITION
 import jp.co.geisha.itunestracker.service.util.DigginTabLayoutManager
 import jp.co.geisha.itunestracker.service.view.adapter.ArtistPagerAdapter
 import timber.log.Timber
 
-/**
- * タブレイアウトの要素出し分け用フラグメントクラス
- *
- * @author katsuya
- * @since 2.0.0
- */
 class ArtistTabsFragment : Fragment() {
 
     private var viewPager: ViewPager? = null
@@ -31,18 +27,6 @@ class ArtistTabsFragment : Fragment() {
     private var digginTabLayoutManager: DigginTabLayoutManager? = null
     internal var binding: jp.co.geisha.itunestracker.databinding.FragmentTablayoutBinding? = null
     private var tabLayout: TabLayout? = null
-    private val targetPosition = 0
-//
-//    /**
-//     * タブ読み込みに失敗した場合、リロードボタンを押した際の処理
-//     */
-//    private val reloadListener = View.OnClickListener { viewModel!!.refresh(true) }
-
-    companion object {
-
-        val ARTIST_TABS_TAG = "ArtistTabsFragment"
-
-    }
 
     /**
      * フラグメント生成時に呼ばれる
@@ -65,6 +49,7 @@ class ArtistTabsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Timber.d("onCreateView")
         this.inflater = inflater
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tablayout, container, false)
 
         tabLayout = binding?.tabLayout
@@ -85,10 +70,10 @@ class ArtistTabsFragment : Fragment() {
         Timber.d("onActivityCreated")
 
         // view pagerに出力する要素を設定
-        tabLayout!!.setupWithViewPager(viewPager)
+        tabLayout?.setupWithViewPager(viewPager)
 
         val themesPagerAdapter = ArtistPagerAdapter(childFragmentManager)
-        viewPager!!.adapter = themesPagerAdapter
+        viewPager?.adapter = themesPagerAdapter
 
         digginTabLayoutManager = DigginTabLayoutManager(
                 this.inflater,
@@ -97,14 +82,12 @@ class ArtistTabsFragment : Fragment() {
                 binding?.selectLine
         )
 
-        val rows = listOf<String>("R&B","SOUL","HIPHOP","RAGGAE")
-
-        Timber.d("onTabChanged: %s", rows.size)
-        themesPagerAdapter.updateItems(rows)
+        Timber.d("onTabChanged: %s", TAB_ROWS.size)
+        themesPagerAdapter.updateItems(TAB_ROWS)
 
         if (activity != null && digginTabLayoutManager != null) {
             digginTabLayoutManager?.setTabSelectCallbacks()
-            digginTabLayoutManager?.setTabLayout(rows, targetPosition, null, requireNotNull(viewPager))
+            digginTabLayoutManager?.setTabLayout(TAB_ROWS, TARGET_POSITION, null, requireNotNull(viewPager))
         }
 
 
