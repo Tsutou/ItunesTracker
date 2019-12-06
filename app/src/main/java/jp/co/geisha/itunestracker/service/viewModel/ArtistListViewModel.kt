@@ -39,23 +39,13 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
             state.value = Status.Loading
             if (count <= MAX_REQUEST_PER_MINUTE) {
                 if (TextUtils.isEmpty(query)) {
-                    getVideoListOfDefaultRandom()
+                    getVideoListWithQuery(DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)])
                 } else {
                     getVideoListWithQuery(query.toString())
                 }
             } else {
                 state.postValue(Status.Error("loadArtists :api call failed Possible limit exceeded , Now count == $count"))
             }
-        }
-    }
-
-    private suspend fun getVideoListOfDefaultRandom() = withContext(Dispatchers.Default) {
-        val result = repo.getMusicVideoList(DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)], MUSIC_VIDEO, LIMIT)
-        if (result.isSuccessful) {
-            state.postValue(Status.Success)
-            videoListLiveData.postValue(result.body())
-        } else {
-            state.postValue(Status.Error("getVideoListOfDefaultRandom : api call failed"))
         }
     }
 
@@ -73,9 +63,9 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
     val scheduler = object : Runnable {
         override fun run() {
             if (count > MAX_REQUEST_PER_MINUTE) {
-                Timber.d("%sだから危険", count)
+                Timber.d("%s danger count", count)
             } else
-                Timber.d("%sだから安全", count)
+                Timber.d("%s count safely", count)
             count = ZERO
             handler.postDelayed(this, DELAY_MINUTES.toLong())
         }
