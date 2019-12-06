@@ -6,8 +6,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.widget.SwipeRefreshLayout
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -17,7 +15,6 @@ import jp.co.geisha.itunestracker.R
 import jp.co.geisha.itunestracker.databinding.FragmentArtistListBinding
 import jp.co.geisha.itunestracker.service.callback.ArtistClickCallback
 import jp.co.geisha.itunestracker.service.model.Artist
-import jp.co.geisha.itunestracker.service.model.ArtistList
 import jp.co.geisha.itunestracker.service.view.activity.MainActivity
 import jp.co.geisha.itunestracker.service.view.adapter.ArtistAdapter
 import jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel

@@ -9,11 +9,9 @@ import retrofit2.http.Query
 
 interface ItunesService {
 
-    //一覧
     @GET("search")
     fun getArtistList(@Query("term") artist: String, @Query("entity") entity: String, @Query("limit") limit: Int): Call<ArtistList>
 
-    //一覧
     @GET("search")
     fun getArtistListByGenre(
             @Query("term") keyword: String,

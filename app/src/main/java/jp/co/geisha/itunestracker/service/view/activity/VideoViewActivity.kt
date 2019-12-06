@@ -1,6 +1,5 @@
 package jp.co.geisha.itunestracker.service.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
@@ -17,19 +16,14 @@ class VideoViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_view)
 
-        val fragment = ArtistVideoViewFragment()
-
-        val i = intent
-        val artistPreviewUrl = i.getStringExtra(URL)
-
-        addVideoViewFragment(fragment, artistPreviewUrl)
+        val artistPreviewUrl = intent.getStringExtra(URL)
+        addVideoViewFragment(ArtistVideoViewFragment(), artistPreviewUrl)
     }
 
     private fun addVideoViewFragment(fragment: ArtistVideoViewFragment, artistPreviewUrl: String) {
-
-        FragmentUtils.setArgsToFragment(fragment, URL, artistPreviewUrl)
-
-        FragmentUtils.insertFragmentToActivity(R.id.fragment_container, supportFragmentManager, fragment, ARTIST_VIDEO_VIEW_FRAGMENT_TAG)
+        FragmentUtils.run {
+            setArgsToFragment(fragment, URL, artistPreviewUrl)
+            insertFragmentToActivity(R.id.fragment_container, supportFragmentManager, fragment, ARTIST_VIDEO_VIEW_FRAGMENT_TAG)
+        }
     }
-
 }

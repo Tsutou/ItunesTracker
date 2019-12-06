@@ -19,8 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import jp.co.geisha.itunestracker.service.HTTPS_API_ITUNES_URL
 
-class ArtistRepository//Retrofitクライアントのコンストラクタ//
-private constructor() {
+class ArtistRepository private constructor() {
 
     private val itunesService: ItunesService
 
@@ -28,7 +27,6 @@ private constructor() {
 
         private var artistRepository: ArtistRepository? = null
 
-        //インスタンス生成
         val instance: ArtistRepository
             @Synchronized get() {
                 return artistRepository ?: ArtistRepository()
@@ -36,8 +34,6 @@ private constructor() {
     }
 
     init {
-
-        //ログ用
         val interceptor = HttpLoggingInterceptor()
 
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -59,18 +55,14 @@ private constructor() {
     }
 
     fun getArtistList(artistName: String, entity: String, limit: Int): LiveData<ArtistList> {
-        //LiveData
         val data = MutableLiveData<ArtistList>()
 
         itunesService.getArtistList(artistName, entity, limit).enqueue(object : Callback<ArtistList> {
             override fun onResponse(call: Call<ArtistList>, response: Response<ArtistList>) {
-
                 data.postValue(response.body())
-
             }
 
             override fun onFailure(call: Call<ArtistList>, t: Throwable) {
-
                 data.postValue(null)
             }
         })

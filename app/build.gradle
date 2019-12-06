@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -60,7 +61,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     // okhttpの動きをカスタマイズするためのライブラリ
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
-    //Picassoトランスフォームライブラリ
+    //Picasso
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
 
     //guava

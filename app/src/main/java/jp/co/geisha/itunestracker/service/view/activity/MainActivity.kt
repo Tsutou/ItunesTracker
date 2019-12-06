@@ -8,11 +8,11 @@ import android.widget.Toast
 import jp.co.geisha.itunestracker.R
 import jp.co.geisha.itunestracker.service.model.Artist
 import jp.co.geisha.itunestracker.service.util.FragmentUtils
-import jp.co.geisha.itunestracker.service.view.fragment.ArtistTabsFragment
 
 import android.text.TextUtils.isEmpty
 import jp.co.geisha.itunestracker.service.ARTIST_TABS_FRAGMENT_TAG
 import jp.co.geisha.itunestracker.service.URL
+import jp.co.geisha.itunestracker.service.view.fragment.ArtistListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
 
-            val fragment = ArtistTabsFragment()
+            val fragment = ArtistListFragment()
 
             FragmentUtils.insertFragmentToActivity(
                     R.id.fragment_container,
@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //VideoView画面への遷移
     fun show(artist: Artist) {
         if (!isEmpty(artist.previewUrl)) {
             val i = Intent(applicationContext, VideoViewActivity::class.java)
