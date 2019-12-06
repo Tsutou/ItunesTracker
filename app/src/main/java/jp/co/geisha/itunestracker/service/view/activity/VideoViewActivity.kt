@@ -1,7 +1,7 @@
 package jp.co.geisha.itunestracker.service.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 import jp.co.geisha.itunestracker.R
 import jp.co.geisha.itunestracker.service.util.FragmentUtils

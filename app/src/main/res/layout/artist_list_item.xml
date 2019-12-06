@@ -15,7 +15,7 @@
     </data>
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginEnd="@dimen/item_horizontal_margin"
@@ -80,5 +80,5 @@
                 app:circleImageUrl="@{artist.artworkUrl100}" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </layout>

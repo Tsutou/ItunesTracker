@@ -1,11 +1,11 @@
 package jp.co.geisha.itunestracker.service.view.fragment
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -23,7 +23,6 @@ import java.util.*
 
 class ArtistListFragment : Fragment() {
 
-    private var artistListAdapter: ArtistAdapter? = null
     private lateinit var binding: FragmentArtistListBinding
     private var isTyping = false
 
@@ -33,25 +32,45 @@ class ArtistListFragment : Fragment() {
                 return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                     return
                 } else {
-                    if (activity != null)
+                    if (activity != null && activity is MainActivity)
                         (activity as MainActivity).show(artist) else return
                 }
             }
         }
 
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(ArtistListViewModel::class.java)
+    }
+
+    private var artistListAdapter: ArtistAdapter = ArtistAdapter(artistClickCallback)
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+            savedInstanceState: Bundle?): View {
 
-        binding = DataBindingUtil.inflate(Objects.requireNonNull(inflater), R.layout.fragment_artist_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_list, container, false)
 
-        artistListAdapter = ArtistAdapter(artistClickCallback)
+        binding.artistList.apply {
+            setHasFixedSize(true)
+            adapter = artistListAdapter
+        }
 
-        binding.artistList.setHasFixedSize(true)
-        binding.artistList.adapter = artistListAdapter
+        viewModel.state.observe(this, Observer { state ->
+            when (state) {
+                is ArtistListViewModel.Status.Success -> binding.swipeContainer.isRefreshing = false
+                is ArtistListViewModel.Status.Loading -> binding.swipeContainer.isRefreshing = true
+            }
+        })
 
-        binding.isLoading = true
+        viewModel.videoListLiveData.observe(this, Observer { videos ->
+            if (videos != null) {
+                artistListAdapter.setArtistList(videos.results)
+            }
+
+        })
+
+        viewModel.loadArtists("")
 
         return binding.root
     }
@@ -59,51 +78,28 @@ class ArtistListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this).get(ArtistListViewModel::class.java)
-
-        observeViewModel(viewModel, false)
-
-        binding.swipeContainer.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorWhite)
-        binding.swipeContainer.isRefreshing = true
-
-        //TextChangeListnerセット
-        binding.searchArtist.addTextChangedListener(getArtistWatcher(viewModel))
-
-        // スワイプダウンの処理
-        binding.swipeContainer.setOnRefreshListener {
-            binding.swipeContainer.isRefreshing = true
-            viewModel.reloadArtists(binding.searchArtist.text)
-            observeViewModel(viewModel, true)
-        }
-    }
-
-    private fun observeViewModel(viewModel: ArtistListViewModel, isReload: Boolean?) {
-
-        viewModel.artistListObservable?.observe(this, Observer { artists ->
-            if (artists != null) {
-                binding.isLoading = false
-                artistListAdapter?.setArtistList(artists.results, isReload) ?: return@Observer
+        binding.swipeContainer.apply {
+            setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorWhite)
+            setOnRefreshListener {
+                viewModel.loadArtists(binding.searchArtist.text.toString())
             }
-            binding.swipeContainer.isRefreshing = false
-        }) ?: return
+        }
+
+        binding.searchArtist.addTextChangedListener(getArtistWatcher())
     }
 
-    private fun getArtistWatcher(viewModel: ArtistListViewModel): TextWatcher {
+    private fun getArtistWatcher(): TextWatcher {
 
         return object : TextWatcher {
 
             private var timer = Timer()
             private val DELAY: Long = 500 // milliseconds
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-
                 if (!isTyping) {
                     Timber.d("started typing")
-
                     isTyping = true
                 }
                 timer.cancel()
@@ -116,10 +112,7 @@ class ArtistListFragment : Fragment() {
                                 Timber.d("stopped typing")
 
                                 if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-
-                                    viewModel.reloadArtists(s.toString())
-                                    observeViewModel(viewModel, true)
-
+                                    viewModel.loadArtists(s.toString())
                                 }
                             }
                         },

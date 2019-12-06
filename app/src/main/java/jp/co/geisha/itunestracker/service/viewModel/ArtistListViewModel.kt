@@ -1,63 +1,96 @@
 package jp.co.geisha.itunestracker.service.viewModel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.AndroidViewModel
 import android.os.Handler
 import android.text.TextUtils
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import jp.co.geisha.itunestracker.service.*
-
 import jp.co.geisha.itunestracker.service.model.ArtistList
 import jp.co.geisha.itunestracker.service.repository.ArtistRepository
 import timber.log.Timber
-
 import jp.co.geisha.itunestracker.service.ConstArrays.DEFAULT_ARTIST_LIST
 import jp.co.geisha.itunestracker.service.util.CalcUtils.getRand
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ArtistListViewModel(application: Application) : AndroidViewModel(application) {
 
-    //LiveDataのゲッター
-    var artistListObservable: LiveData<ArtistList>? = null
-        private set
-    private val repo: ArtistRepository
+    sealed class Status {
+        object Success : Status()
+        object Loading : Status()
+        data class Error(val message: String) : Status()
+    }
+
+    val videoListLiveData: MutableLiveData<ArtistList> = MutableLiveData()
+    val state: MutableLiveData<Status> = MutableLiveData()
+    private val repo: ArtistRepository = ArtistRepository.instance
+    private val handler = Handler()
     private var count: Int = 0
 
     init {
         setUpRequestScheduler()
-
-        repo = ArtistRepository.instance
-
-        artistListObservable = repo.getArtistList(DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)], MUSIC_VIDEO, LIMIT)
     }
 
-    fun reloadArtists(text: CharSequence) {
-        if (count <= MAX_REQUEST_PER_MINUTE) {
-            if (TextUtils.isEmpty(text)) {
-                artistListObservable = repo.getArtistList(DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)], MUSIC_VIDEO, LIMIT)
+    fun loadArtists(query: CharSequence) {
+        viewModelScope.launch {
+            state.value = Status.Loading
+            if (count <= MAX_REQUEST_PER_MINUTE) {
+                if (TextUtils.isEmpty(query)) {
+                    getVideoListOfDefaultRandom()
+                } else {
+                    getVideoListWithQuery(query.toString())
+                }
             } else {
-                artistListObservable = repo.getArtistList(text.toString(), MUSIC_VIDEO, LIMIT)
-                count++
+                state.postValue(Status.Error("loadArtists :api call failed Possible limit exceeded , Now count == $count"))
             }
+        }
+    }
+
+    private suspend fun getVideoListOfDefaultRandom() = withContext(Dispatchers.Default) {
+        val result = repo.getMusicVideoList(DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)], MUSIC_VIDEO, LIMIT)
+        if (result.isSuccessful) {
+            state.postValue(Status.Success)
+            videoListLiveData.postValue(result.body())
         } else {
-            Timber.d("%s制限超過", count)
+            state.postValue(Status.Error("getVideoListOfDefaultRandom : api call failed"))
+        }
+    }
+
+    private suspend fun getVideoListWithQuery(query: String) = withContext(Dispatchers.Default) {
+        val result = repo.getMusicVideoList(query, MUSIC_VIDEO, LIMIT)
+        if (result.isSuccessful) {
+            state.postValue(Status.Success)
+            videoListLiveData.postValue(result.body())
+            count++
+        } else {
+            state.postValue(Status.Error("getVideoListWithQuery : api call failed"))
+        }
+    }
+
+    val scheduler = object : Runnable {
+        override fun run() {
+            if (count > MAX_REQUEST_PER_MINUTE) {
+                Timber.d("%sだから危険", count)
+            } else
+                Timber.d("%sだから安全", count)
+            count = ZERO
+            handler.postDelayed(this, DELAY_MINUTES.toLong())
         }
     }
 
     private fun setUpRequestScheduler() {
-
-        val handler = Handler()
-
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                // UIスレッド
-                if (count > MAX_REQUEST_PER_MINUTE) {
-                    Timber.d("%sだから危険", count)
-                } else
-                    Timber.d("%sだから安全", count)
-                count = ZERO
-                handler.postDelayed(this, DELAY_MINUTES.toLong())
-            }
-        }, DELAY_MINUTES.toLong())
+        viewModelScope.launch {
+            handler.postDelayed(scheduler, DELAY_MINUTES.toLong())
+        }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        handler.removeCallbacks {
+            scheduler
+        }
+    }
 }

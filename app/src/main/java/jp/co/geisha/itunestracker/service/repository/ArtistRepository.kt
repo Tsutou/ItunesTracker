@@ -1,12 +1,6 @@
 package jp.co.geisha.itunestracker.service.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.util.Log
-
-import jp.co.geisha.itunestracker.service.model.Artist
 import jp.co.geisha.itunestracker.service.model.ArtistList
-import com.google.gson.JsonElement
 import java.util.concurrent.TimeUnit
 
 import okhttp3.OkHttpClient
@@ -18,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 import jp.co.geisha.itunestracker.service.HTTPS_API_ITUNES_URL
+import jp.co.geisha.itunestracker.service.service.ItunesService
 
 class ArtistRepository private constructor() {
 
@@ -51,31 +46,11 @@ class ArtistRepository private constructor() {
                 .build()
 
         itunesService = retrofit.create(ItunesService::class.java)
-
     }
 
-    fun getArtistList(artistName: String, entity: String, limit: Int): LiveData<ArtistList> {
-        val data = MutableLiveData<ArtistList>()
-
-        itunesService.getArtistList(artistName, entity, limit).enqueue(object : Callback<ArtistList> {
-            override fun onResponse(call: Call<ArtistList>, response: Response<ArtistList>) {
-                data.postValue(response.body())
-            }
-
-            override fun onFailure(call: Call<ArtistList>, t: Throwable) {
-                data.postValue(null)
-            }
-        })
-
-        return data
-    }
-
-    private fun simulateDelay() {
-        try {
-            Thread.sleep(10)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
-    }
+    suspend fun getMusicVideoList(
+            artistName: String,
+            entity: String,
+            limit: Int
+    ): Response<ArtistList> = itunesService.getArtistList(artistName, entity, limit)
 }
