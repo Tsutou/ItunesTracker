@@ -1,5 +1,5 @@
 # diggin. 
-MusicVideo Search App ( MVVM + LiveData + Retrofit )
+MusicVideo Search App
 
 サンプルミュージックビデオを直感的に、リアクティブに検索する。
 その機能だけに絞ったシンプルなアプリです。
