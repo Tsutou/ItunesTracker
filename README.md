@@ -8,6 +8,10 @@ MusicVideo Search App ( MVVM + LiveData + Retrofit )
 
 https://play.google.com/store/apps/details?id=jp.co.geisha.itunestracker
 
+
+### Since there are only simple functions, we are waiting for PR!
+---
+
 ```
 Privacy Policy
 Tsutou built the diggin app as an Open Source app. This SERVICE is provided by Tsutou at no cost and is intended for use as is.
