@@ -1,18 +1,12 @@
-package jp.co.geisha.itunestracker.service
+package jp.co.geisha.itunestracker
 
 //TAG
-
-const val ARTIST_LIST_FRAGMENT_TAG = "ArtistListFragment"
+const val ARTIST_LIST_FRAGMENT_TAG = "ArtistVideoListFragment"
 const val ARTIST_TABS_FRAGMENT_TAG = "ArtistTabsFragment"
 const val ARTIST_VIDEO_VIEW_FRAGMENT_TAG = "ArtistVideoViewFragment"
 
 //Retrofitインターフェース(APIリクエストを管理)
 const val HTTPS_API_ITUNES_URL = "https://itunes.apple.com/"
-
-//タブレイアウトのPOSITION
-const val TAB_START_POSITION = 0
-const val ONLY_DEFAULT_TAB = 1
-const val TARGET_POSITION = 0
 
 const val URL = "URL"
 
@@ -54,9 +48,6 @@ const val BANNER_SCRIPT = "" +
         "</script>"
 
 object ConstArrays {
-
     @JvmField
     val DEFAULT_ARTIST_LIST = arrayOf("alicia keys", "lady gaga", "michael jackson", "beatles", "stevie wonder", "eric clapton", "beyonce", "james brown", "sting", "oasis", "2pac", "Nas", "bob marley", "billy joel", "elton john", "bruno mars", "joe", "justin timberlake", "TLC", "SWV", "blackstreet", "jackson5", "ed sheeran", "boyz 2 men", "india arie", "talor swift", "norah jones", "frank sinatra", "marvin gaye", "mariah carey", "diana ross", "jamiroquai", "john lenon", "tuxedo")
-
-    val TAB_ROWS = listOf<String>("R&B", "SOUL", "HIPHOP", "RAGGAE")
 }

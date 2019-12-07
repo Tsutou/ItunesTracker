@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.service.util
+package jp.co.geisha.itunestracker.util
 
 import android.graphics.Bitmap
 import android.graphics.Matrix

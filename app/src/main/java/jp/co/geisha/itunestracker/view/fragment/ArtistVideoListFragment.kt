@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.service.view.fragment
+package jp.co.geisha.itunestracker.view.fragment
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -11,17 +11,20 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import jp.co.geisha.itunestracker.R
 import jp.co.geisha.itunestracker.databinding.FragmentArtistListBinding
-import jp.co.geisha.itunestracker.service.callback.ArtistClickCallback
-import jp.co.geisha.itunestracker.service.model.Artist
-import jp.co.geisha.itunestracker.service.view.activity.MainActivity
-import jp.co.geisha.itunestracker.service.view.adapter.ArtistAdapter
-import jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel
+import jp.co.geisha.itunestracker.callback.ArtistClickCallback
+import jp.co.geisha.itunestracker.api.entity.Artist
+import jp.co.geisha.itunestracker.view.activity.MainActivity
+import jp.co.geisha.itunestracker.view.adapter.ArtistVideoAdapter
+import jp.co.geisha.itunestracker.viewModel.ArtistListViewModel
 import timber.log.Timber
 import java.util.*
 
-class ArtistListFragment : Fragment() {
+class ArtistVideoListFragment : Fragment() {
 
     private lateinit var binding: FragmentArtistListBinding
     private var isTyping = false
@@ -42,7 +45,7 @@ class ArtistListFragment : Fragment() {
         ViewModelProviders.of(this).get(ArtistListViewModel::class.java)
     }
 
-    private var artistListAdapter: ArtistAdapter = ArtistAdapter(artistClickCallback)
+    private var artistListAdapter: ArtistVideoAdapter = ArtistVideoAdapter(artistClickCallback)
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -53,24 +56,29 @@ class ArtistListFragment : Fragment() {
 
         binding.artistList.apply {
             setHasFixedSize(true)
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
             adapter = artistListAdapter
         }
 
-        viewModel.state.observe(this, Observer { state ->
-            when (state) {
-                is ArtistListViewModel.Status.Success -> binding.swipeContainer.isRefreshing = false
-                is ArtistListViewModel.Status.Loading -> binding.swipeContainer.isRefreshing = true
-            }
-        })
+        viewModel.apply {
+            state.observe(viewLifecycleOwner, Observer { state ->
+                when (state) {
+                    is ArtistListViewModel.Status.Success -> binding.swipeContainer.isRefreshing = false
+                    is ArtistListViewModel.Status.Loading -> binding.swipeContainer.isRefreshing = true
+                    is ArtistListViewModel.Status.Error -> {
+                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_SHORT)
+                    }
+                }
+            })
+            videoListLiveData.observe(viewLifecycleOwner, Observer { videos ->
+                if (videos != null) {
+                    artistListAdapter.setArtistList(videos.data)
+                }
+            })
 
-        viewModel.videoListLiveData.observe(this, Observer { videos ->
-            if (videos != null) {
-                artistListAdapter.setArtistList(videos.results)
-            }
-
-        })
-
-        viewModel.loadArtists("")
+            setUpRequestScheduler()
+            loadArtists("")
+        }
 
         return binding.root
     }

@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="jp.co.geisha.itunestracker.service.viewModel.ArtistListViewModel" />
+            type="jp.co.geisha.itunestracker.viewModel.ArtistListViewModel" />
     </data>
 
     <LinearLayout
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/loading_artists"
+            android:id="@+id/loadingArtists"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal"
@@ -36,11 +36,11 @@
             app:visibleGone="@{!isLoading}">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/search_artist"
+                android:id="@+id/searchArtist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:autoSizeTextType="uniform"
                 android:gravity="center_horizontal"
                 android:hint="Please enter your loved musician"
@@ -58,25 +58,14 @@
                 app:met_textColor="#fff" />
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_container"
+                android:id="@+id/swipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- RecyclerViewの先頭要素のheightが 0dpの時に SwipeRefreshが機能しないので
-                 FrameLayoutで囲う対応を行う
-                  https://github.com/airbnb/epoxy/issues/74 -->
-                <FrameLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/artist_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/artist_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="Artist List"
-                        app:layoutManager="LinearLayoutManager" />
-
-                </FrameLayout>
+                    android:layout_height="match_parent" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

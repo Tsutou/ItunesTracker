@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.service.viewModel
+package jp.co.geisha.itunestracker.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,12 +6,12 @@ import android.os.Handler
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import jp.co.geisha.itunestracker.service.*
-import jp.co.geisha.itunestracker.service.model.ArtistList
-import jp.co.geisha.itunestracker.service.repository.ArtistRepository
+import jp.co.geisha.itunestracker.*
+import jp.co.geisha.itunestracker.repository.ArtistRepository
 import timber.log.Timber
-import jp.co.geisha.itunestracker.service.ConstArrays.DEFAULT_ARTIST_LIST
-import jp.co.geisha.itunestracker.service.util.CalcUtils.getRand
+import jp.co.geisha.itunestracker.ConstArrays.DEFAULT_ARTIST_LIST
+import jp.co.geisha.itunestracker.api.entity.Artist
+import jp.co.geisha.itunestracker.util.CalcUtils.getRand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,43 +24,42 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
         data class Error(val message: String) : Status()
     }
 
-    val videoListLiveData: MutableLiveData<ArtistList> = MutableLiveData()
+    val videoListLiveData: MutableLiveData<Artist.Result> = MutableLiveData()
     val state: MutableLiveData<Status> = MutableLiveData()
-    private val repo: ArtistRepository = ArtistRepository.instance
+
+    private val repository: ArtistRepository = ArtistRepository.getInstance()
+
     private val handler = Handler()
     private var count: Int = 0
 
-    init {
-        setUpRequestScheduler()
-    }
-
-    fun loadArtists(query: CharSequence) {
+    fun loadArtists(textInput: CharSequence) {
         viewModelScope.launch {
             state.value = Status.Loading
             if (count <= MAX_REQUEST_PER_MINUTE) {
-                if (TextUtils.isEmpty(query)) {
-                    getVideoListWithQuery(DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)])
+                val searchText = if (TextUtils.isEmpty(textInput)) {
+                    DEFAULT_ARTIST_LIST[getRand(DEFAULT_ARTIST_LIST.size)]
                 } else {
-                    getVideoListWithQuery(query.toString())
+                    textInput
                 }
+                getVideoListWithQuery(searchText.toString())
             } else {
-                state.postValue(Status.Error("loadArtists :api call failed Possible limit exceeded , Now count == $count"))
+                state.postValue(Status.Error("Possible limit exceeded , Now count == $count"))
             }
         }
     }
 
     private suspend fun getVideoListWithQuery(query: String) = withContext(Dispatchers.Default) {
-        val result = repo.getMusicVideoList(query, MUSIC_VIDEO, LIMIT)
+        val result = repository.getMusicVideoList( query, MUSIC_VIDEO, LIMIT)
         if (result.isSuccessful) {
             state.postValue(Status.Success)
             videoListLiveData.postValue(result.body())
             count++
         } else {
-            state.postValue(Status.Error("getVideoListWithQuery : api call failed"))
+            state.postValue(Status.Error("api call failed"))
         }
     }
 
-    val scheduler = object : Runnable {
+    private val scheduler = object : Runnable {
         override fun run() {
             if (count > MAX_REQUEST_PER_MINUTE) {
                 Timber.d("%s danger count", count)
@@ -71,7 +70,7 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    private fun setUpRequestScheduler() {
+    fun setUpRequestScheduler() {
         viewModelScope.launch {
             handler.postDelayed(scheduler, DELAY_MINUTES.toLong())
         }

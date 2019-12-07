@@ -1,83 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="artist"
-            type="jp.co.geisha.itunestracker.service.model.Artist" />
+            type="jp.co.geisha.itunestracker.api.entity.Artist" />
 
         <variable
             name="callback"
-            type="jp.co.geisha.itunestracker.service.callback.ArtistClickCallback" />
+            type="jp.co.geisha.itunestracker.callback.ArtistClickCallback" />
     </data>
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginEnd="@dimen/item_horizontal_margin"
-        android:layout_marginStart="@dimen/item_horizontal_margin"
-        android:background="@drawable/main_theme"
+        android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
         android:onClick="@{() ->  callback.onClick(artist)}"
-        android:orientation="horizontal"
         app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/item_horizontal_margin"
-                android:layout_marginStart="@dimen/item_horizontal_margin"
-                android:layout_weight="3"
-                android:orientation="vertical"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:text="@{artist.trackCensoredName}"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/languages"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="@{artist.artistName}"
-                    android:textColor="@color/colorWhite" />
-
-                <TextView
-                    android:id="@+id/artist_watchers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{artist.primaryGenreName}"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/artist_text" />
-            </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:layout_weight="1"
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:elevation="20dp"
                 android:padding="8dp"
-                app:circleImageUrl="@{artist.artworkUrl100}" />
+                app:circleImageUrl="@{artist.artworkUrl100}"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@{artist.trackCensoredName}"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/languages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{artist.artistName}"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/artist_watchers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@{artist.primaryGenreName}"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/artist_text" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

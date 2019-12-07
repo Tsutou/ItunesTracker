@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.service.binding
+package jp.co.geisha.itunestracker.binding
 
 import androidx.databinding.BindingAdapter
 import android.view.View

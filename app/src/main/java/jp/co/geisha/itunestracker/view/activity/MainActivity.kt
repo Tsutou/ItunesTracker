@@ -1,18 +1,15 @@
-package jp.co.geisha.itunestracker.service.view.activity
+package jp.co.geisha.itunestracker.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 
 import jp.co.geisha.itunestracker.R
-import jp.co.geisha.itunestracker.service.model.Artist
-import jp.co.geisha.itunestracker.service.util.FragmentUtils
+import jp.co.geisha.itunestracker.api.entity.Artist
+import jp.co.geisha.itunestracker.util.FragmentUtils
 
-import android.text.TextUtils.isEmpty
-import jp.co.geisha.itunestracker.service.ARTIST_TABS_FRAGMENT_TAG
-import jp.co.geisha.itunestracker.service.URL
-import jp.co.geisha.itunestracker.service.view.fragment.ArtistListFragment
+import jp.co.geisha.itunestracker.ARTIST_TABS_FRAGMENT_TAG
+import jp.co.geisha.itunestracker.view.fragment.ArtistVideoListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,23 +18,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-
-            val fragment = ArtistListFragment()
+            val fragment = ArtistVideoListFragment()
 
             FragmentUtils.insertFragmentToActivity(
-                    R.id.fragment_container,
+                    R.id.fragmentContainer,
                     supportFragmentManager,
                     fragment,
                     ARTIST_TABS_FRAGMENT_TAG)
         }
-
     }
 
     fun show(artist: Artist) {
-        if (!isEmpty(artist.previewUrl)) {
-            val i = Intent(applicationContext, VideoViewActivity::class.java)
-            i.putExtra(URL, artist.previewUrl)
-            startActivity(i)
+        if (artist.previewUrl.isNotEmpty()) {
+            val intent = VideoViewActivity.createIntent(this,artist.previewUrl)
+            startActivity(intent)
         } else {
             Toast.makeText(applicationContext, "This Video has not Preview", Toast.LENGTH_SHORT).show()
         }
