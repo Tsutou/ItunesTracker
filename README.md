@@ -6,7 +6,7 @@ MusicVideo Search App
 
 ![eyecatch](https://lh3.googleusercontent.com/67OCnBECjDkqAG6NdEsjwMazU0l90c0eVWisF6iZyMXC4pEtrw_d4OfpXZF8pdVcBQE=s180-rw)
 
-https://play.google.com/store/apps/details?id=jp.co.geisha.itunestracker
+https://play.google.com/store/apps/details?id=jp.co.geisha.diggin
 
 
 ### Since there are only simple functions, we are waiting for PR!
