@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.view.fragment
+package jp.co.geisha.diggin.view.fragment
 
 import android.annotation.SuppressLint
 import android.net.Uri
@@ -11,11 +11,10 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.MediaController
 
-import jp.co.geisha.itunestracker.R
-import jp.co.geisha.itunestracker.util.FragmentUtils
+import jp.co.geisha.diggin.R
+import jp.co.geisha.diggin.util.FragmentUtils
 
-import jp.co.geisha.itunestracker.URL
-import kotlinx.android.synthetic.main.fragment_video_view.*
+import jp.co.geisha.diggin.URL
 import kotlinx.android.synthetic.main.fragment_video_view.view.*
 
 class ArtistVideoViewFragment : Fragment() {

@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.api.entity
+package jp.co.geisha.diggin.api.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

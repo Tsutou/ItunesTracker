@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker
+package jp.co.geisha.diggin
 
 //TAG
 const val ARTIST_LIST_FRAGMENT_TAG = "ArtistVideoListFragment"

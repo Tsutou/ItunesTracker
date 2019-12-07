@@ -1,14 +1,14 @@
-package jp.co.geisha.itunestracker.view.adapter
+package jp.co.geisha.diggin.view.adapter
 
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-import jp.co.geisha.itunestracker.R
-import jp.co.geisha.itunestracker.databinding.ArtistListItemBinding
-import jp.co.geisha.itunestracker.callback.ArtistClickCallback
-import jp.co.geisha.itunestracker.api.entity.Artist
+import jp.co.geisha.diggin.R
+import jp.co.geisha.diggin.databinding.ArtistListItemBinding
+import jp.co.geisha.diggin.callback.ArtistClickCallback
+import jp.co.geisha.diggin.api.entity.Artist
 
 internal class ArtistVideoAdapter(private val artistClickCallback: ArtistClickCallback?)
     : RecyclerView.Adapter<ArtistVideoAdapter.ArtistViewHolder>() {

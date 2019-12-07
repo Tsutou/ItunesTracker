@@ -8,11 +8,11 @@
 
         <variable
             name="artist"
-            type="jp.co.geisha.itunestracker.api.entity.Artist" />
+            type="jp.co.geisha.diggin.api.entity.Artist" />
 
         <variable
             name="callback"
-            type="jp.co.geisha.itunestracker.callback.ArtistClickCallback" />
+            type="jp.co.geisha.diggin.callback.ArtistClickCallback" />
     </data>
 
 

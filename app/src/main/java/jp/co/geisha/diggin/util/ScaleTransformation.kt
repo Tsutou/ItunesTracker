@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.util
+package jp.co.geisha.diggin.util
 
 import android.graphics.Bitmap
 import android.graphics.Matrix

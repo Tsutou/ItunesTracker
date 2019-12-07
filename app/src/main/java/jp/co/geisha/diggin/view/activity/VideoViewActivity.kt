@@ -1,16 +1,16 @@
-package jp.co.geisha.itunestracker.view.activity
+package jp.co.geisha.diggin.view.activity
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-import jp.co.geisha.itunestracker.R
-import jp.co.geisha.itunestracker.util.FragmentUtils
-import jp.co.geisha.itunestracker.view.fragment.ArtistVideoViewFragment
+import jp.co.geisha.diggin.R
+import jp.co.geisha.diggin.util.FragmentUtils
+import jp.co.geisha.diggin.view.fragment.ArtistVideoViewFragment
 
-import jp.co.geisha.itunestracker.ARTIST_VIDEO_VIEW_FRAGMENT_TAG
-import jp.co.geisha.itunestracker.URL
+import jp.co.geisha.diggin.ARTIST_VIDEO_VIEW_FRAGMENT_TAG
+import jp.co.geisha.diggin.URL
 
 class VideoViewActivity : AppCompatActivity() {
 

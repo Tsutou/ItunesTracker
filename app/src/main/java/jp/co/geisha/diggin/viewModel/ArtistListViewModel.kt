@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.viewModel
+package jp.co.geisha.diggin.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,12 +6,12 @@ import android.os.Handler
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import jp.co.geisha.itunestracker.*
-import jp.co.geisha.itunestracker.repository.ArtistRepository
+import jp.co.geisha.diggin.*
+import jp.co.geisha.diggin.repository.ArtistRepository
 import timber.log.Timber
-import jp.co.geisha.itunestracker.ConstArrays.DEFAULT_ARTIST_LIST
-import jp.co.geisha.itunestracker.api.entity.Artist
-import jp.co.geisha.itunestracker.util.CalcUtils.getRand
+import jp.co.geisha.diggin.ConstArrays.DEFAULT_ARTIST_LIST
+import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.util.CalcUtils.getRand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

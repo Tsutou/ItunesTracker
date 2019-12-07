@@ -1,8 +1,8 @@
-package jp.co.geisha.itunestracker.repository
+package jp.co.geisha.diggin.repository
 
 import retrofit2.Response
-import jp.co.geisha.itunestracker.api.ItunesApi
-import jp.co.geisha.itunestracker.api.entity.Artist
+import jp.co.geisha.diggin.api.ItunesApi
+import jp.co.geisha.diggin.api.entity.Artist
 
 class ArtistRepository private constructor() {
 

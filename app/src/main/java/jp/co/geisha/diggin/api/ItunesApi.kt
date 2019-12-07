@@ -1,8 +1,8 @@
-package jp.co.geisha.itunestracker.api
+package jp.co.geisha.diggin.api
 
 import com.squareup.moshi.Moshi
-import jp.co.geisha.itunestracker.HTTPS_API_ITUNES_URL
-import jp.co.geisha.itunestracker.api.service.ItunesService
+import jp.co.geisha.diggin.HTTPS_API_ITUNES_URL
+import jp.co.geisha.diggin.api.service.ItunesService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

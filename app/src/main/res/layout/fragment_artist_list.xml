@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="jp.co.geisha.itunestracker.viewModel.ArtistListViewModel" />
+            type="jp.co.geisha.diggin.viewModel.ArtistListViewModel" />
     </data>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker;
+package jp.co.geisha.diggin;
 
 import org.junit.Test;
 

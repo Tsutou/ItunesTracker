@@ -1,8 +1,8 @@
-package jp.co.geisha.itunestracker.binding
+package jp.co.geisha.diggin.binding
 
 import androidx.databinding.BindingAdapter
 import android.widget.ImageView
-import jp.co.geisha.itunestracker.util.PicassoUtil
+import jp.co.geisha.diggin.util.PicassoUtil
 
 object ImageBindingAdapter {
 

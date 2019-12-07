@@ -1,6 +1,6 @@
-package jp.co.geisha.itunestracker.api.service
+package jp.co.geisha.diggin.api.service
 
-import jp.co.geisha.itunestracker.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.Artist
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

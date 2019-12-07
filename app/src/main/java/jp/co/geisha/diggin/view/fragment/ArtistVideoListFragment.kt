@@ -1,4 +1,4 @@
-package jp.co.geisha.itunestracker.view.fragment
+package jp.co.geisha.diggin.view.fragment
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -11,16 +11,15 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import jp.co.geisha.itunestracker.R
-import jp.co.geisha.itunestracker.databinding.FragmentArtistListBinding
-import jp.co.geisha.itunestracker.callback.ArtistClickCallback
-import jp.co.geisha.itunestracker.api.entity.Artist
-import jp.co.geisha.itunestracker.view.activity.MainActivity
-import jp.co.geisha.itunestracker.view.adapter.ArtistVideoAdapter
-import jp.co.geisha.itunestracker.viewModel.ArtistListViewModel
+import jp.co.geisha.diggin.R
+import jp.co.geisha.diggin.databinding.FragmentArtistListBinding
+import jp.co.geisha.diggin.callback.ArtistClickCallback
+import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.view.activity.MainActivity
+import jp.co.geisha.diggin.view.adapter.ArtistVideoAdapter
+import jp.co.geisha.diggin.viewModel.ArtistListViewModel
 import timber.log.Timber
 import java.util.*
 
