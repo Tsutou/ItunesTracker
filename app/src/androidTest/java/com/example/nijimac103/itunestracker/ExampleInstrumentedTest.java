@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("jp.co.geisha.itunestracker", appContext.getPackageName());
+        assertEquals("jp.co.geisha.diggin", appContext.getPackageName());
     }
 }

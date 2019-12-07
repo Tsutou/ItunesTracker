@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "jp.co.geisha.itunestracker"
+        applicationId "jp.co.geisha.diggin"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 200
@@ -73,6 +73,7 @@ dependencies {
 
     //Firebase
     implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
 
     //Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
