@@ -7,10 +7,10 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import jp.co.geisha.diggin.*
-import jp.co.geisha.diggin.repository.ArtistRepository
+import jp.co.geisha.diggin.repository.ItunesRepository
 import timber.log.Timber
 import jp.co.geisha.diggin.ConstArrays.DEFAULT_ARTIST_LIST
-import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.util.CalcUtils.getRand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,10 +24,10 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
         data class Error(val message: String) : Status()
     }
 
-    val videoListLiveData: MutableLiveData<Artist.Result> = MutableLiveData()
+    val videoListLiveData: MutableLiveData<ItunesData.Result> = MutableLiveData()
     val state: MutableLiveData<Status> = MutableLiveData()
 
-    private val repository: ArtistRepository = ArtistRepository.getInstance()
+    private val repository: ItunesRepository = ItunesRepository.getInstance()
 
     private val handler = Handler()
     private var count: Int = 0

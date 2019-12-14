@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.databinding.FragmentArtistListBinding
 import jp.co.geisha.diggin.callback.ArtistClickCallback
-import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.view.activity.MainActivity
 import jp.co.geisha.diggin.view.adapter.ArtistVideoAdapter
 import jp.co.geisha.diggin.viewModel.ArtistListViewModel
@@ -30,12 +30,12 @@ class ArtistVideoListFragment : Fragment() {
 
     private val artistClickCallback
         get() = object : ArtistClickCallback {
-            override fun onClick(artist: Artist) {
+            override fun onClick(itunesData: ItunesData) {
                 return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                     return
                 } else {
                     if (activity != null && activity is MainActivity)
-                        (activity as MainActivity).show(artist) else return
+                        (activity as MainActivity).show(itunesData) else return
                 }
             }
         }

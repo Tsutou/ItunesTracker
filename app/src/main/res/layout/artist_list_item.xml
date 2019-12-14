@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="artist"
-            type="jp.co.geisha.diggin.api.entity.Artist" />
+            name="itunesData"
+            type="jp.co.geisha.diggin.api.entity.ItunesData" />
 
         <variable
             name="callback"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="@{() ->  callback.onClick(artist)}"
+        android:onClick="@{() ->  callback.onClick(itunesData)}"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="0dp"
         app:cardElevation="1dp"
@@ -41,7 +41,7 @@
                 android:contentDescription="@null"
                 android:elevation="20dp"
                 android:padding="8dp"
-                app:circleImageUrl="@{artist.artworkUrl100}"
+                app:circleImageUrl="@{itunesData.artworkUrl100}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@{artist.trackCensoredName}"
+                android:text="@{itunesData.trackCensoredName}"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
@@ -62,7 +62,7 @@
                 android:layout_marginBottom="4dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="@{artist.artistName}"
+                android:text="@{itunesData.artistName}"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp" />
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@{artist.primaryGenreName}"
+                android:text="@{itunesData.primaryGenreName}"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/artist_text" />

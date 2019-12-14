@@ -8,17 +8,17 @@ import android.view.ViewGroup
 import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.databinding.ArtistListItemBinding
 import jp.co.geisha.diggin.callback.ArtistClickCallback
-import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.ItunesData
 
 internal class ArtistVideoAdapter(private val artistClickCallback: ArtistClickCallback?)
     : RecyclerView.Adapter<ArtistVideoAdapter.ArtistViewHolder>() {
 
-    private var artistVideoList: ArrayList<Artist> = arrayListOf()
+    private var itunesDataVideoList: ArrayList<ItunesData> = arrayListOf()
 
-    fun setArtistList(artistList: List<Artist>) {
-        this.artistVideoList.let { list ->
+    fun setArtistList(itunesDataList: List<ItunesData>) {
+        this.itunesDataVideoList.let { list ->
             list.clear()
-            list.addAll(artistList)
+            list.addAll(itunesDataList)
         }
         notifyDataSetChanged()
     }
@@ -31,12 +31,12 @@ internal class ArtistVideoAdapter(private val artistClickCallback: ArtistClickCa
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
-        holder.binding.artist = artistVideoList[position]
+        holder.binding.artist = itunesDataVideoList[position]
         holder.binding.executePendingBindings()
     }
 
     override fun getItemCount(): Int {
-        return artistVideoList.size
+        return itunesDataVideoList.size
     }
 
     internal class ArtistViewHolder(

@@ -2,17 +2,17 @@ package jp.co.geisha.diggin.repository
 
 import retrofit2.Response
 import jp.co.geisha.diggin.api.ItunesApi
-import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.ItunesData
 
-class ArtistRepository private constructor() {
+class ItunesRepository private constructor() {
 
     companion object {
         @Volatile
-        private var INSTANCE: ArtistRepository? = null
+        private var INSTANCE: ItunesRepository? = null
 
-        fun getInstance(): ArtistRepository =
+        fun getInstance(): ItunesRepository =
                 INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: ArtistRepository()
+                    INSTANCE ?: ItunesRepository()
                             .also { INSTANCE = it }
                 }
     }
@@ -21,5 +21,5 @@ class ArtistRepository private constructor() {
             artistName: String,
             entity: String,
             limit: Int
-    ): Response<Artist.Result> = ItunesApi.getService().getArtistList(artistName, entity, limit)
+    ): Response<ItunesData.Result> = ItunesApi.getService().getSampleVideoList(artistName, entity, limit)
 }

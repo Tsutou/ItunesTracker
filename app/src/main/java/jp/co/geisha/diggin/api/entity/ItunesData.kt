@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Artist(
+data class ItunesData(
         val artistName: String,
         val trackCensoredName: String,
         val previewUrl: String = "",
@@ -16,6 +16,6 @@ data class Artist(
     @JsonClass(generateAdapter = true)
     data class Result (
             @Json(name = "results")
-            val data: List<Artist>
+            val data: List<ItunesData>
     )
 }

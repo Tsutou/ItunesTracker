@@ -1,7 +1,7 @@
 package jp.co.geisha.diggin.callback
 
-import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.ItunesData
 
 interface ArtistClickCallback {
-    fun onClick(artist: Artist)
+    fun onClick(itunesData: ItunesData)
 }

@@ -1,7 +1,7 @@
 package jp.co.geisha.diggin.api
 
 import com.squareup.moshi.Moshi
-import jp.co.geisha.diggin.HTTPS_API_ITUNES_URL
+import jp.co.geisha.diggin.API_ITUNES_BASE_URL
 import jp.co.geisha.diggin.api.service.ItunesService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,7 +30,7 @@ class ItunesApi {
 
          private fun createRetrofit(): Retrofit {
              return Retrofit.Builder()
-                     .baseUrl(HTTPS_API_ITUNES_URL)
+                     .baseUrl(API_ITUNES_BASE_URL)
                      .client(okHttpClient)
                      .addConverterFactory(moshiConverterFactory)
                      .build()

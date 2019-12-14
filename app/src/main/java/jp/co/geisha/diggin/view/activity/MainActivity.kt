@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 
 import jp.co.geisha.diggin.R
-import jp.co.geisha.diggin.api.entity.Artist
+import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.util.FragmentUtils
 
 import jp.co.geisha.diggin.ARTIST_TABS_FRAGMENT_TAG
@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun show(artist: Artist) {
-        if (artist.previewUrl.isNotEmpty()) {
-            val intent = VideoViewActivity.createIntent(this,artist.previewUrl)
+    fun show(itunesData: ItunesData) {
+        if (itunesData.previewUrl.isNotEmpty()) {
+            val intent = VideoViewActivity.createIntent(this,itunesData.previewUrl)
             startActivity(intent)
         } else {
             Toast.makeText(applicationContext, "This Video has not Preview", Toast.LENGTH_SHORT).show()

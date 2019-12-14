@@ -5,8 +5,8 @@ const val ARTIST_LIST_FRAGMENT_TAG = "ArtistVideoListFragment"
 const val ARTIST_TABS_FRAGMENT_TAG = "ArtistTabsFragment"
 const val ARTIST_VIDEO_VIEW_FRAGMENT_TAG = "ArtistVideoViewFragment"
 
-//Retrofitインターフェース(APIリクエストを管理)
-const val HTTPS_API_ITUNES_URL = "https://itunes.apple.com/"
+const val API_ITUNES_BASE_URL = "https://itunes.apple.com/"
+const val API_GOOGLE_BASE_URL = "https://www.googleapis.com/"
 
 const val URL = "URL"
 
