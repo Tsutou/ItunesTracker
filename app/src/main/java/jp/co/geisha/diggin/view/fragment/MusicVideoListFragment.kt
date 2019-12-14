@@ -15,21 +15,21 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.databinding.FragmentArtistListBinding
-import jp.co.geisha.diggin.callback.ArtistClickCallback
+import jp.co.geisha.diggin.callback.MusicVideoClickCallback
 import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.view.activity.MainActivity
-import jp.co.geisha.diggin.view.adapter.ArtistVideoAdapter
-import jp.co.geisha.diggin.viewModel.ArtistListViewModel
+import jp.co.geisha.diggin.view.adapter.MusicVideoListAdapter
+import jp.co.geisha.diggin.viewModel.MusicVideoListViewModel
 import timber.log.Timber
 import java.util.*
 
-class ArtistVideoListFragment : Fragment() {
+class MusicVideoListFragment : Fragment() {
 
     private lateinit var binding: FragmentArtistListBinding
     private var isTyping = false
 
     private val artistClickCallback
-        get() = object : ArtistClickCallback {
+        get() = object : MusicVideoClickCallback {
             override fun onClick(itunesData: ItunesData) {
                 return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                     return
@@ -41,10 +41,10 @@ class ArtistVideoListFragment : Fragment() {
         }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ArtistListViewModel::class.java)
+        ViewModelProviders.of(this).get(MusicVideoListViewModel::class.java)
     }
 
-    private var artistListAdapter: ArtistVideoAdapter = ArtistVideoAdapter(artistClickCallback)
+    private var musicListListAdapter: MusicVideoListAdapter = MusicVideoListAdapter(artistClickCallback)
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -56,22 +56,27 @@ class ArtistVideoListFragment : Fragment() {
         binding.artistList.apply {
             setHasFixedSize(true)
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-            adapter = artistListAdapter
+            adapter = musicListListAdapter
         }
 
         viewModel.apply {
             state.observe(viewLifecycleOwner, Observer { state ->
                 when (state) {
-                    is ArtistListViewModel.Status.Success -> binding.swipeContainer.isRefreshing = false
-                    is ArtistListViewModel.Status.Loading -> binding.swipeContainer.isRefreshing = true
-                    is ArtistListViewModel.Status.Error -> {
+                    is MusicVideoListViewModel.Status.Success -> binding.swipeContainer.isRefreshing = false
+                    is MusicVideoListViewModel.Status.Loading -> binding.swipeContainer.isRefreshing = true
+                    is MusicVideoListViewModel.Status.Error -> {
                         Snackbar.make(binding.root, state.message, Snackbar.LENGTH_SHORT)
                     }
                 }
             })
-            videoListLiveData.observe(viewLifecycleOwner, Observer { videos ->
+            youTubeListLiveData.observe(viewLifecycleOwner, Observer { videos ->
                 if (videos != null) {
-                    artistListAdapter.setArtistList(videos.data)
+                    musicListListAdapter.setYoutubeDataList(videos.items)
+                }
+            })
+            itunesListLiveData.observe(viewLifecycleOwner, Observer { videos ->
+                if (videos != null) {
+                    musicListListAdapter.setItunesDataList(videos.data)
                 }
             })
 
@@ -100,7 +105,7 @@ class ArtistVideoListFragment : Fragment() {
         return object : TextWatcher {
 
             private var timer = Timer()
-            private val DELAY: Long = 500 // milliseconds
+            private val DELAY_MILLIS: Long = 500 // milliseconds
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
 
@@ -117,13 +122,12 @@ class ArtistVideoListFragment : Fragment() {
                                 isTyping = false
                                 //タイピングが500ms停止したらArtistのReloadを実行
                                 Timber.d("stopped typing")
-
                                 if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                                     viewModel.loadArtists(s.toString())
                                 }
                             }
                         },
-                        DELAY
+                        DELAY_MILLIS
                 )
             }
 

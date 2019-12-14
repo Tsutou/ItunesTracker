@@ -15,5 +15,5 @@ interface YouTubeService {
             @Query("key") key: String,
             @Query("maxResults") maxResults: Int,
             @Query("videoCategoryId") videoCategoryId: Int
-    ) : Response<YouTubeResponse.Data>
+    ) : Response<YouTubeResponse>
 }

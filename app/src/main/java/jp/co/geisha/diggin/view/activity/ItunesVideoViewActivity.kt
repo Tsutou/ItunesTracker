@@ -7,16 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 
 import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.util.FragmentUtils
-import jp.co.geisha.diggin.view.fragment.ArtistVideoViewFragment
+import jp.co.geisha.diggin.view.fragment.MusicVideoViewFragment
 
 import jp.co.geisha.diggin.ARTIST_VIDEO_VIEW_FRAGMENT_TAG
 import jp.co.geisha.diggin.URL
 
-class VideoViewActivity : AppCompatActivity() {
+class ItunesVideoViewActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context, url: String): Intent {
-            return Intent(context, VideoViewActivity::class.java).apply {
+            return Intent(context, ItunesVideoViewActivity::class.java).apply {
                 putExtra(URL, url)
             }
         }
@@ -29,13 +29,13 @@ class VideoViewActivity : AppCompatActivity() {
         val artistPreviewUrl = intent?.getStringExtra(URL)
 
         artistPreviewUrl?.let {
-            addVideoViewFragment(ArtistVideoViewFragment(), artistPreviewUrl)
+            addVideoViewFragment(MusicVideoViewFragment(), artistPreviewUrl)
         } ?: run {
             finish()
         }
     }
 
-    private fun addVideoViewFragment(fragment: ArtistVideoViewFragment, artistPreviewUrl: String) {
+    private fun addVideoViewFragment(fragment: MusicVideoViewFragment, artistPreviewUrl: String) {
         FragmentUtils.run {
             setArgsToFragment(fragment, URL, artistPreviewUrl)
             insertFragmentToActivity(R.id.fragmentContainer, supportFragmentManager, fragment, ARTIST_VIDEO_VIEW_FRAGMENT_TAG)

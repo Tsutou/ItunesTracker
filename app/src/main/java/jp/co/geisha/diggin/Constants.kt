@@ -1,14 +1,16 @@
 package jp.co.geisha.diggin
 
 //TAG
-const val ARTIST_LIST_FRAGMENT_TAG = "ArtistVideoListFragment"
+const val ARTIST_LIST_FRAGMENT_TAG = "MusicVideoListFragment"
 const val ARTIST_TABS_FRAGMENT_TAG = "ArtistTabsFragment"
-const val ARTIST_VIDEO_VIEW_FRAGMENT_TAG = "ArtistVideoViewFragment"
+const val ARTIST_VIDEO_VIEW_FRAGMENT_TAG = "MusicVideoViewFragment"
 
 const val API_ITUNES_BASE_URL = "https://itunes.apple.com/"
 const val API_GOOGLE_BASE_URL = "https://www.googleapis.com/"
 
 const val URL = "URL"
+
+const val YOUTUBE_CAROUSEL_POSITION = 0
 
 //検索制御定数
 const val DELAY_MINUTES = 60000

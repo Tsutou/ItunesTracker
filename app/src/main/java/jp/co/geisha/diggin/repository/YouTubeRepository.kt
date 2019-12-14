@@ -19,7 +19,7 @@ class YouTubeRepository private constructor() {
 
     suspend fun getMusicVideoList(
             query: String
-    ): Response<YouTubeResponse.Data> = YouTubeApi.getService().getVideoList(
+    ): Response<YouTubeResponse> = YouTubeApi.getService().getVideoList(
             "video",
             "snippet",
             query,

@@ -30,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="jp.co.geisha.diggin.view.activity.VideoViewActivity"/>
+        <activity android:name="jp.co.geisha.diggin.view.activity.ItunesVideoViewActivity"/>
     </application>
 
 </manifest>

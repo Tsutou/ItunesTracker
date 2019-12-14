@@ -9,7 +9,7 @@ import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.util.FragmentUtils
 
 import jp.co.geisha.diggin.ARTIST_TABS_FRAGMENT_TAG
-import jp.co.geisha.diggin.view.fragment.ArtistVideoListFragment
+import jp.co.geisha.diggin.view.fragment.MusicVideoListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            val fragment = ArtistVideoListFragment()
+            val fragment = MusicVideoListFragment()
 
             FragmentUtils.insertFragmentToActivity(
                     R.id.fragmentContainer,
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     fun show(itunesData: ItunesData) {
         if (itunesData.previewUrl.isNotEmpty()) {
-            val intent = VideoViewActivity.createIntent(this,itunesData.previewUrl)
+            val intent = ItunesVideoViewActivity.createIntent(this,itunesData.previewUrl)
             startActivity(intent)
         } else {
             Toast.makeText(applicationContext, "This Video has not Preview", Toast.LENGTH_SHORT).show()

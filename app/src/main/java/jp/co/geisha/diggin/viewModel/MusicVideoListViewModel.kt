@@ -11,12 +11,14 @@ import jp.co.geisha.diggin.repository.ItunesRepository
 import timber.log.Timber
 import jp.co.geisha.diggin.ConstArrays.DEFAULT_ARTIST_LIST
 import jp.co.geisha.diggin.api.entity.ItunesData
+import jp.co.geisha.diggin.api.entity.YouTubeResponse
+import jp.co.geisha.diggin.repository.YouTubeRepository
 import jp.co.geisha.diggin.util.CalcUtils.getRand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ArtistListViewModel(application: Application) : AndroidViewModel(application) {
+class MusicVideoListViewModel(application: Application) : AndroidViewModel(application) {
 
     sealed class Status {
         object Success : Status()
@@ -24,10 +26,12 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
         data class Error(val message: String) : Status()
     }
 
-    val videoListLiveData: MutableLiveData<ItunesData.Result> = MutableLiveData()
+    val youTubeListLiveData: MutableLiveData<YouTubeResponse> = MutableLiveData()
+    val itunesListLiveData: MutableLiveData<ItunesData.Result> = MutableLiveData()
     val state: MutableLiveData<Status> = MutableLiveData()
 
-    private val repository: ItunesRepository = ItunesRepository.getInstance()
+    private val itunesRepository: ItunesRepository = ItunesRepository.getInstance()
+    private val youtubeRepository: YouTubeRepository = YouTubeRepository.getInstance()
 
     private val handler = Handler()
     private var count: Int = 0
@@ -49,10 +53,14 @@ class ArtistListViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     private suspend fun getVideoListWithQuery(query: String) = withContext(Dispatchers.Default) {
-        val result = repository.getMusicVideoList( query, MUSIC_VIDEO, LIMIT)
-        if (result.isSuccessful) {
+
+        val youTubeResult = youtubeRepository.getMusicVideoList(query)
+        val itunesResult = itunesRepository.getMusicVideoList(query, MUSIC_VIDEO, LIMIT)
+
+        if (youTubeResult.isSuccessful && itunesResult.isSuccessful) {
             state.postValue(Status.Success)
-            videoListLiveData.postValue(result.body())
+            itunesListLiveData.postValue(itunesResult.body())
+            youTubeListLiveData.postValue(youTubeResult.body())
             count++
         } else {
             state.postValue(Status.Error("api call failed"))
