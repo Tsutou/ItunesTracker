@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.api.entity.YouTubeResponse
 import jp.co.geisha.diggin.callback.MusicVideoClickCallback
+import kotlinx.android.synthetic.main.youtube_carousel_item.view.*
 
 class YouTubeCarouselViewHolder(itemView: View, private val listener: MusicVideoClickCallback) : RecyclerView.ViewHolder(itemView) {
 
@@ -22,13 +23,13 @@ class YouTubeCarouselViewHolder(itemView: View, private val listener: MusicVideo
 
     fun bindData(data: List<YouTubeResponse.Data>) {
         val pagerAdapter = YoutubeCarouselPagerAdapter()
-//        itemView.youtubeItemViewPager.apply {
-//            adapter = pagerAdapter.apply {
-//                bindData(section.rows)
-//                setCallback(listener)
-//            }
-//            offscreenPageLimit = rows.size
-//        }
-//        itemView.storeItemsIndicator.setViewPager(itemView.storeItemsViewPager)
+        itemView.viewPager.apply {
+            adapter = pagerAdapter.apply {
+                bindData(data)
+                setCallback(listener)
+            }
+            offscreenPageLimit = data.size
+        }
+        itemView.itemsIndicator.setViewPager(itemView.viewPager)
     }
 }

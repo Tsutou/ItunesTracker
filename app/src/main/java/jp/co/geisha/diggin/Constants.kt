@@ -3,7 +3,7 @@ package jp.co.geisha.diggin
 //TAG
 const val ARTIST_LIST_FRAGMENT_TAG = "MusicVideoListFragment"
 const val ARTIST_TABS_FRAGMENT_TAG = "ArtistTabsFragment"
-const val ARTIST_VIDEO_VIEW_FRAGMENT_TAG = "MusicVideoViewFragment"
+const val ARTIST_VIDEO_VIEW_FRAGMENT_TAG = "ItunesVideoViewFragment"
 
 const val API_ITUNES_BASE_URL = "https://itunes.apple.com/"
 const val API_GOOGLE_BASE_URL = "https://www.googleapis.com/"

@@ -17,7 +17,7 @@ import jp.co.geisha.diggin.util.FragmentUtils
 import jp.co.geisha.diggin.URL
 import kotlinx.android.synthetic.main.fragment_video_view.view.*
 
-class MusicVideoViewFragment : Fragment() {
+class ItunesVideoViewFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater,
