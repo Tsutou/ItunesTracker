@@ -23,6 +23,6 @@ object PicassoUtil {
     fun loadPicassoWithCropCircleTransformation(url: String, view: ImageView)
             = Picasso.get().load(url).transform(CropCircleTransformation()).into(view)
 
-    fun loadPicassoToFit(url: String, error: Drawable, view: ImageView, f: Float)
-            = Picasso.get().load(url).transform(ScaleTransformation(f)).error(error).into(view)
+    fun loadPicassoToFit(url: String, view: ImageView, f: Float)
+            = Picasso.get().load(url).transform(ScaleTransformation(f)).into(view)
 }
