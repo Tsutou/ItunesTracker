@@ -24,7 +24,7 @@ class YouTubeRepository private constructor() {
             "snippet",
             query,
             "",
-            5,
+            10,
             10
     )
 }
