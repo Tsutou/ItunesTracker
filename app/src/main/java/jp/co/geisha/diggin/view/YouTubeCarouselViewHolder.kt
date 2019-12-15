@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.api.entity.YouTubeResponse
 import jp.co.geisha.diggin.callback.MusicVideoClickCallback
-import kotlinx.android.synthetic.main.youtube_carousel_item.view.*
+import kotlinx.android.synthetic.main.youtube_carousel_view.view.*
 
 class YouTubeCarouselViewHolder(itemView: View, private val listener: MusicVideoClickCallback) : RecyclerView.ViewHolder(itemView) {
 
@@ -15,7 +15,7 @@ class YouTubeCarouselViewHolder(itemView: View, private val listener: MusicVideo
         fun newInstance(parent: ViewGroup, listener: MusicVideoClickCallback): YouTubeCarouselViewHolder {
             return YouTubeCarouselViewHolder(
                     LayoutInflater.from(parent.context)
-                            .inflate(R.layout.youtube_carousel_item, parent, false),
+                            .inflate(R.layout.youtube_carousel_view, parent, false),
                     listener
             )
         }
