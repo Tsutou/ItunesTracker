@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.YOUTUBE_CAROUSEL_POSITION
 import jp.co.geisha.diggin.databinding.ArtistListItemBinding
 import jp.co.geisha.diggin.callback.MusicVideoClickCallback
 import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.api.entity.YouTubeResponse
 import jp.co.geisha.diggin.view.YouTubeCarouselViewHolder
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 internal class MusicVideoListAdapter(private val musicVideoClickCallback: MusicVideoClickCallback)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -46,7 +46,7 @@ internal class MusicVideoListAdapter(private val musicVideoClickCallback: MusicV
                 YouTubeCarouselViewHolder.newInstance(parent, musicVideoClickCallback)
             }
             else -> {
-                val binding = DataBindingUtil.inflate<ArtistListItemBinding>(LayoutInflater.from(parent.context), R.layout.artist_list_item, parent, false)
+                val binding = DataBindingUtil.inflate<ArtistListItemBinding>(LayoutInflater.from(parent.context), jp.co.geisha.diggin.R.layout.artist_list_item, parent, false)
                 binding.callback = musicVideoClickCallback
                 ArtistViewHolder(binding)
             }
@@ -56,10 +56,12 @@ internal class MusicVideoListAdapter(private val musicVideoClickCallback: MusicV
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is YouTubeCarouselViewHolder -> {
+                val layoutParams = holder.itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
+                layoutParams.isFullSpan = true
                 holder.bindData(youtubeDataList)
             }
             is ArtistViewHolder -> {
-                holder.binding.artist = itunesDataVideoList[position]
+                holder.binding.itunesData = itunesDataVideoList[position]
                 holder.binding.executePendingBindings()
             }
         }
