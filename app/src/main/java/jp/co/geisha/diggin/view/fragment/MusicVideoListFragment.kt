@@ -17,6 +17,7 @@ import jp.co.geisha.diggin.R
 import jp.co.geisha.diggin.databinding.FragmentArtistListBinding
 import jp.co.geisha.diggin.callback.MusicVideoClickCallback
 import jp.co.geisha.diggin.api.entity.ItunesData
+import jp.co.geisha.diggin.api.entity.YouTubeResponse
 import jp.co.geisha.diggin.view.activity.MainActivity
 import jp.co.geisha.diggin.view.adapter.MusicVideoListAdapter
 import jp.co.geisha.diggin.viewModel.MusicVideoListViewModel
@@ -38,6 +39,14 @@ class MusicVideoListFragment : Fragment() {
                         (activity as MainActivity).show(itunesData) else return
                 }
             }
+
+            override fun onClick(youtubeData: YouTubeResponse.Data) {
+                return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                    return
+                } else {
+                    if (activity != null && activity is MainActivity) return else return
+                }
+            }
         }
 
     private val viewModel by lazy {
@@ -55,7 +64,11 @@ class MusicVideoListFragment : Fragment() {
 
         binding.artistList.apply {
             setHasFixedSize(true)
-            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = object :StaggeredGridLayoutManager(3, VERTICAL){
+                override fun setSpanCount(spanCount: Int) {
+                    super.setSpanCount(spanCount)
+                }
+            }
             adapter = musicListListAdapter
         }
 
