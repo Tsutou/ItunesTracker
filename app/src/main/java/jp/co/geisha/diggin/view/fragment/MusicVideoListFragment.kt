@@ -44,7 +44,8 @@ class MusicVideoListFragment : Fragment() {
                 return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                     return
                 } else {
-                    if (activity != null && activity is MainActivity) return else return
+                    if (activity != null && activity is MainActivity)
+                        (activity as MainActivity).show(youtubeData) else return
                 }
             }
         }
