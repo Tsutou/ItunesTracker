@@ -9,8 +9,8 @@ android {
         applicationId "jp.co.geisha.diggin"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 200
-        versionName "2.0"
+        versionCode 300
+        versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
