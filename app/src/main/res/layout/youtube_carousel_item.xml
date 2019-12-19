@@ -33,12 +33,12 @@
 
             <ImageView
                 android:id="@+id/profile_image"
-                imageUrl="@{youtubeData.snippet.thumbnails.high.url}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="140dp"
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
+                imageUrl="@{youtubeData.snippet.thumbnails.high.url}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="h,4:3"
                 app:layout_constraintEnd_toEndOf="parent"
