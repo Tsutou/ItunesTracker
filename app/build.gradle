@@ -18,9 +18,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "YOUTUBE_API_KEY", "\"${project.property("youtubeApiKey")}\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "YOUTUBE_API_KEY", "\"${project.property("youtubeApiKey")}\""
         }
     }
     dataBinding {

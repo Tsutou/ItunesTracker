@@ -1,5 +1,6 @@
 package jp.co.geisha.diggin.repository
 
+import jp.co.geisha.diggin.BuildConfig
 import jp.co.geisha.diggin.api.YouTubeApi
 import jp.co.geisha.diggin.api.entity.YouTubeResponse
 import retrofit2.Response
@@ -23,7 +24,7 @@ class YouTubeRepository private constructor() {
             "video",
             "snippet",
             query,
-            "",
+            BuildConfig.YOUTUBE_API_KEY,
             10,
             10
     )

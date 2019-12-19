@@ -10,6 +10,7 @@ import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.util.FragmentUtils
 
 import jp.co.geisha.diggin.ARTIST_TABS_FRAGMENT_TAG
+import jp.co.geisha.diggin.BuildConfig
 import jp.co.geisha.diggin.api.entity.YouTubeResponse
 import jp.co.geisha.diggin.view.fragment.MusicVideoListFragment
 
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
             val intent = YouTubeStandalonePlayer.createVideoIntent(
                     this,
-                    "",
+                    BuildConfig.YOUTUBE_API_KEY,
                     youtubeData.id.videoId,
                     0,
                     true,
