@@ -1,11 +1,8 @@
 package jp.co.geisha.diggin.view
 
-import android.content.Context
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.PagerAdapter
 import jp.co.geisha.diggin.R
@@ -16,7 +13,7 @@ import jp.co.geisha.diggin.databinding.YoutubeCarouselItemBinding
 
 class YoutubeCarouselPagerAdapter : PagerAdapter() {
 
-    private var listener: MusicVideoClickCallback? = null
+    private var clickCallback: MusicVideoClickCallback? = null
     private var rows = arrayListOf<YouTubeResponse.Data>()
 
     override fun isViewFromObject(view: View, obj: Any): Boolean = view == obj
@@ -28,7 +25,7 @@ class YoutubeCarouselPagerAdapter : PagerAdapter() {
         val itemView = DataBindingUtil.inflate<YoutubeCarouselItemBinding>(LayoutInflater.from(container.context), R.layout.youtube_carousel_item, container, false)
         return itemView.apply {
             youtubeData = row
-            callback = listener
+            callback = clickCallback
             executePendingBindings()
             container.addView(root)
         }.root
@@ -41,7 +38,7 @@ class YoutubeCarouselPagerAdapter : PagerAdapter() {
     }
 
     fun setCallback(callback: MusicVideoClickCallback) {
-        this.listener = callback
+        this.clickCallback = callback
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
