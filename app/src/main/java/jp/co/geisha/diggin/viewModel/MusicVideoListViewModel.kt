@@ -12,7 +12,10 @@ import timber.log.Timber
 import jp.co.geisha.diggin.ConstArrays.DEFAULT_ARTIST_LIST
 import jp.co.geisha.diggin.api.entity.ItunesData
 import jp.co.geisha.diggin.api.entity.YouTubeResponse
+import jp.co.geisha.diggin.data.MusicDatabase
+import jp.co.geisha.diggin.repository.MusicRepository
 import jp.co.geisha.diggin.repository.YouTubeRepository
+import jp.co.geisha.diggin.usecase.MusicDataUseCase
 import jp.co.geisha.diggin.util.CalcUtils.getRand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,8 +33,16 @@ class MusicVideoListViewModel(application: Application) : AndroidViewModel(appli
     val itunesListLiveData: MutableLiveData<ItunesData.Result> = MutableLiveData()
     val state: MutableLiveData<Status> = MutableLiveData()
 
+    private val musicDataUsecase = MusicDataUseCase()
+
     private val itunesRepository: ItunesRepository = ItunesRepository.getInstance()
     private val youtubeRepository: YouTubeRepository = YouTubeRepository.getInstance()
+    private val musicDataRepository: MusicRepository
+
+    init {
+        val musicDao = MusicDatabase.loadDataBase(getApplication(), viewModelScope).musicDao()
+        musicDataRepository = MusicRepository.getInstance(musicDao)
+    }
 
     private val handler = Handler()
     private var count: Int = 0
@@ -48,6 +59,21 @@ class MusicVideoListViewModel(application: Application) : AndroidViewModel(appli
                 getVideoListWithQuery(searchText.toString())
             } else {
                 state.postValue(Status.Error("Possible limit exceeded , Now count == $count"))
+            }
+        }
+    }
+
+    fun insert(youtubeData: YouTubeResponse.Data?, itunesData: ItunesData?) {
+        viewModelScope.launch(Dispatchers.Default) {
+            youtubeData?.let {
+                musicDataRepository.insert(
+                        musicDataUsecase.convert(it)
+                )
+            }
+            itunesData?.let {
+                musicDataRepository.insert(
+                        musicDataUsecase.convert(it)
+                )
             }
         }
     }

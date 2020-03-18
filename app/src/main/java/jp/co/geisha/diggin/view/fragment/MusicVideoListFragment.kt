@@ -2,7 +2,6 @@ package jp.co.geisha.diggin.view.fragment
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +10,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import jp.co.geisha.diggin.R
@@ -29,14 +29,22 @@ class MusicVideoListFragment : Fragment() {
     private lateinit var binding: FragmentArtistListBinding
     private var isTyping = false
 
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(MusicVideoListViewModel::class.java)
+    }
+
     private val artistClickCallback
         get() = object : MusicVideoClickCallback {
             override fun onClick(itunesData: ItunesData) {
                 return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                     return
                 } else {
-                    if (activity != null && activity is MainActivity)
-                        (activity as MainActivity).show(itunesData) else return
+                    if (activity != null && activity is MainActivity) {
+                        viewModel.insert(null, itunesData)
+                        (activity as MainActivity).show(itunesData)
+                    } else {
+                        return
+                    }
                 }
             }
 
@@ -44,15 +52,15 @@ class MusicVideoListFragment : Fragment() {
                 return if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                     return
                 } else {
-                    if (activity != null && activity is MainActivity)
-                        (activity as MainActivity).show(youtubeData) else return
+                    if (activity != null && activity is MainActivity) {
+                        viewModel.insert(youtubeData, null)
+                        (activity as MainActivity).show(youtubeData)
+                    } else {
+                        return
+                    }
                 }
             }
         }
-
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(MusicVideoListViewModel::class.java)
-    }
 
     private var musicListListAdapter: MusicVideoListAdapter = MusicVideoListAdapter(artistClickCallback)
 
@@ -65,11 +73,7 @@ class MusicVideoListFragment : Fragment() {
 
         binding.artistList.apply {
             setHasFixedSize(true)
-            layoutManager = object :StaggeredGridLayoutManager(3, VERTICAL){
-                override fun setSpanCount(spanCount: Int) {
-                    super.setSpanCount(spanCount)
-                }
-            }
+            layoutManager = object : StaggeredGridLayoutManager(3, VERTICAL) {}
             adapter = musicListListAdapter
         }
 
